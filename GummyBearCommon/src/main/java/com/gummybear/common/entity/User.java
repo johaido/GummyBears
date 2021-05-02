@@ -33,10 +33,10 @@ public class User {
 	@Column(name = "last_name", length = 45, nullable = false)
 	private String lastName;
 	
-	@Column(name = "job_title", length = 64, nullable = false)
+	@Column(name = "job_title", length = 64)
 	private String jobTitle;
 	
-	@Column(name = "working_hours", length = 4, nullable = false)
+	@Column(name = "working_hours", nullable = false)
 	private Double workingHours;
 	
 	private boolean enabled;
@@ -52,11 +52,12 @@ public class User {
 	public User() {
 	}
 	
-	public User(String email, String password, String firstName, String lastName) {
+	public User(String email, String password, String firstName, String lastName, Double workingHours) {
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.workingHours = workingHours;
 	}
 	
 	public void addRole(Role role) {
@@ -134,5 +135,10 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", roles=" + roles + "]";
+	}
 }
