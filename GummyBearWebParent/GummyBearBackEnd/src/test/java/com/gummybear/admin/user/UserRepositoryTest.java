@@ -99,12 +99,22 @@ public class UserRepositoryTest {
 	
 	/**
 	 * @author Thitari
-	 * Testing disable and enable for functionallity 
+	 * Testing disable
 	 */
 	@Test
 	public void testDisableUser() {
 		Integer id = 1;
 		repo.updateEnabledStatus(id, false);
+	}
+	
+	/***
+	 * @author Thitari
+	 * Testing enable user
+	 */
+	@Test
+	public void testEnableUser() {
+		Integer id = 3;
+		repo.updateEnabledStatus(id, true);
 	}
 	
 
