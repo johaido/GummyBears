@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.gummybear.admin.user.UserRepository;
+import com.gummybear.common.entity.User;
 
 public class GummyBearUserDetailsService implements UserDetailsService {
 	
