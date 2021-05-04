@@ -82,7 +82,6 @@ public class UserController {
   /**
    * @author Thitari
    */
-
   @GetMapping("/users/delete/{id}")
   public String deleteUser(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirectAttributes) {
       try {
@@ -91,7 +90,6 @@ public class UserController {
       }
       catch (UserNotFoundException ex) {
           redirectAttributes.addFlashAttribute("message", ex.getMessage());
-
       }
       return "redirect:/users";
   }
