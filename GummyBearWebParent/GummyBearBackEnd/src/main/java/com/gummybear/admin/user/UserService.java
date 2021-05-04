@@ -61,8 +61,7 @@ public class UserService {
 	
 	//encodePassword()
 	private void encodePassword(User user) {
-		// TODO Auto-generated method stub
-		
+		//some code here
 	}
 
 	/**
