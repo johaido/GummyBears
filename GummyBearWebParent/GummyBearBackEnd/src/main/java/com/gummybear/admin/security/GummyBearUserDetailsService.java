@@ -11,11 +11,11 @@ import com.gummybear.common.entity.User;
 public class GummyBearUserDetailsService implements UserDetailsService {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserRepository userRepo;
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		User user = userRepository.getUserByEmail(email);
+		User user = userRepo.getUserByEmail(email);
 		if (user !=null) {
 			return new GummyBearUserDetails(user);
 		}
