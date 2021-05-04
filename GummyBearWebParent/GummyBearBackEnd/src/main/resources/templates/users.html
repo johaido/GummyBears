@@ -97,7 +97,8 @@
 					<a class="fas fa-edit fa-2x icon green" th:href="@{'/users/edit/' + ${user.id}}"
 					title="Edit this user"></a>
 					&nbsp;
-					<a class="fas fa-trash fa-2x icon-dark" th:href=""></a>
+					<!-- update hibernate link from S33-->
+					<a class="fas fa-trash fa-2x icon-dark" th:href="@{'/users/delete/' + ${user.id}}"></a>
 					</td>
 					
 				</tr>
