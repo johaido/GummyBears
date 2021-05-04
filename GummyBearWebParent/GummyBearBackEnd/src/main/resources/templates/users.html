@@ -89,6 +89,11 @@
 					<td>[[${user.jobTitle}]]</td>
 					<td>[[${user.workingHours}]]</td>
 					
+					<!-- enable icon -->
+					<td>
+						<a th:if="${user.enabled == true}" class="fas fa-check-circle fa-2x icon-green" href=""></a>
+						<a th:if="${user.enabled == false}" class="fas fa-circle fa-2x icon-dark" href=""></a>
+					</td>
 					
 					
 					<!--Thitari-->
