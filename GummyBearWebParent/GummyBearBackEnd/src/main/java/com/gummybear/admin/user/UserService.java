@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gummybear.common.entity.Role;
 import com.gummybear.common.entity.User;
 
 @Service
+@Transactional
 public class UserService {
 	
 	
@@ -21,6 +24,9 @@ public class UserService {
 	 */
 	@Autowired
 	private RoleRepository roleRepo;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public List<User> listAll() {
 		return (List<User>) userRepo.findAll();
@@ -61,8 +67,8 @@ public class UserService {
 	
 	//encodePassword()
 	private void encodePassword(User user) {
-		// TODO Auto-generated method stub
-		
+		String encodePassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodePassword);
 	}
 
 	/**
@@ -70,23 +76,28 @@ public class UserService {
 	 */
 	public boolean isEmailUnique(Integer id, String email) {
 		User userByEmail = userRepo.getUserByEmail(email);
+		/**
+		 * user is found with the email 
+		 * which means Email is unique in DB
+		 */
 		if(userByEmail == null) return true;
 		/**
 		 * if id is null means that the form in new modal
-		 * otherwise means user is being edited.
+		 * otherwise means that user is being edited.
 		 */
-		boolean isCreatingNew = ( id == null);
+		boolean isCreatingNew = (id == null);
+		
 		if(isCreatingNew) {
-			if (userByEmail != null) {
-				return false; // other user has this email
-			}else {
+			if (userByEmail != null) return false;
+		}// other user has this email
+			else {
 				if (userByEmail.getId() != id) {
 					return false;//the email is not unique
 				}
 			}
 			return true;
-		}
-		return userByEmail == null;
+		//}
+		//return userByEmail == null;
 	}
 	
 	/**
@@ -119,4 +130,10 @@ public class UserService {
 		userRepo.deleteById(id);
 	}
 	
+	/**
+	 * @author Thitari
+	 */
+	public void updateUserEnabledStatus(Integer id, boolean enabled) {
+		userRepo.updateEnabledStatus(id, enabled);
+	}
 }

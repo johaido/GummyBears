@@ -85,4 +85,37 @@ public class UserRepositoryTest {
 		Integer userId = 1;
 		repo.deleteById(userId);
 	}
+	
+	/**
+	 * @author Thitari
+	 */
+	@Test
+	public void testCountById() {
+		//Integer id  = 100; //right now is no user with ID 100 that exist in the DB ->Thus it should failed when you run the test
+		Integer id = 1; //It will success
+		Long countById = repo.countById(id);
+		assertThat(countById).isNotNull().isGreaterThan(0);
+	}
+	
+	/**
+	 * @author Thitari
+	 * Testing disable
+	 */
+	@Test
+	public void testDisableUser() {
+		Integer id = 1;
+		repo.updateEnabledStatus(id, false);
+	}
+	
+	/***
+	 * @author Thitari
+	 * Testing enable user
+	 */
+	@Test
+	public void testEnableUser() {
+		Integer id = 3;
+		repo.updateEnabledStatus(id, true);
+	}
+	
+
 }
