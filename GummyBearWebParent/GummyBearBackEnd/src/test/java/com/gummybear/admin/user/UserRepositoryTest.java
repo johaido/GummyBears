@@ -117,5 +117,13 @@ public class UserRepositoryTest {
 		repo.updateEnabledStatus(id, true);
 	}
 	
+	@Test
+	public void testGetUserByEmail( ) {
+		String email = "abc@de.fg";
+		User user = repo.getUserByEmail(email);
+		
+		assertThat(user).isNotNull();
+	}
+	
 
 }

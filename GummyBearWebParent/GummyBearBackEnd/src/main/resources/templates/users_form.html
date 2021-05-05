@@ -103,6 +103,25 @@ th:object="${user}" onsubmit="return checkEmailUnique(this);">
         </div>
     </div>
 </form>
+
+<div class="modal fade text-center" id="modalDialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="modalTitle">Warning</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			
+			<div class="modal-body">
+				<span id="modalBody"></span>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 	
 
 	
@@ -126,6 +145,10 @@ th:object="${user}" onsubmit="return checkEmailUnique(this);">
     userId = $("#id").val();
     csrfValue = $("input[name='_csrf']").val();
     params = {id: userId, email: userEmail, _csrf: csrfValue};
+    
+    $("#modalDialog").modal();
+    
+    if (true) return false;
 
     $post(url, params, function(response){
         if(response == "OK"){
@@ -140,6 +163,14 @@ th:object="${user}" onsubmit="return checkEmailUnique(this);">
     });
     return false;
 }
+
+
+	function showModalDialog(title, message) {
+		$("#modalTitle").text(title);
+		$("#modalBody").text(message);
+		$("#modalDialog").modal();
+	}
+	
 	</script>
 </body>
 </html>

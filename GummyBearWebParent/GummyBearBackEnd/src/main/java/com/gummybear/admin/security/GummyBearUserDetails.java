@@ -13,6 +13,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.gummybear.common.entity.Role;
 import com.gummybear.common.entity.User;
 
+/**
+ * @author Jonas
+ */
+
 public class GummyBearUserDetails implements UserDetails {
 	
 	private User user;
