@@ -43,17 +43,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.authenticationProvider(authenticationProvider());
 	}
 	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-		.antMatchers("/**").hasRole("Admin")
-		.anyRequest().authenticated()
-		.and()
-		.formLogin()
-		.loginPage("/login")
-		.usernameParameter("email")
-		.and().logout().permitAll();
-	}
+	/*
+	 * @Override protected void configure(HttpSecurity http) throws Exception {
+	 * http.authorizeRequests().anyRequest().permitAll(); }
+	 */
+	
+	
+
+	  @Override protected void configure(HttpSecurity http) throws Exception {
+	  http.authorizeRequests() .antMatchers("/**").hasRole("Admin")
+	  .anyRequest().authenticated() .and() .formLogin() .loginPage("/login")
+	  .usernameParameter("email") .and().logout().permitAll(); }
+	 
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
