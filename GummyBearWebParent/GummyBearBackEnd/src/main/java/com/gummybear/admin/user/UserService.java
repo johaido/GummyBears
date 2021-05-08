@@ -65,7 +65,7 @@ public class UserService {
 		userRepo.save(user);
 	}
 	
-	//encodePassword()
+
 	private void encodePassword(User user) {
 		String encodePassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodePassword);
