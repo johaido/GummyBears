@@ -13,18 +13,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.gummybear.common.entity.Role;
 import com.gummybear.common.entity.User;
 
+
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserService service;
 	
+	
 	@GetMapping("/users")
 	public String listAll(Model model) {
 		List<User> listUsers = service.listAll();
 		model.addAttribute("listUsers", listUsers);
+
 		return "users";
 	}
+	
 	
 	
 	/**
