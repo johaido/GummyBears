@@ -14,10 +14,10 @@ public interface UserRepository extends CrudRepository <User, Integer>{
 	
 	/**
 	 * @author Jonas
-	 */
+	 
 	@Query("SELECT u FROM user u Where u.email = :email")
 	public User getUserByEmail(@Param("email") String email);
-
+	*/
 	/**
 	 * @author Thitari
 	 * @return
