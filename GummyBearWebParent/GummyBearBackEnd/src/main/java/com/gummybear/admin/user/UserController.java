@@ -108,5 +108,4 @@ public class UserController {
 	  redirectAttributes.addFlashAttribute("message", message);
 	  return "redirect:/users";
   }
-  
 }
