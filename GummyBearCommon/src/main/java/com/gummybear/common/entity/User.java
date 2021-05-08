@@ -37,9 +37,15 @@ public class User {
 	@Column(name = "job_title", length = 64)
 	private String jobTitle;
 	
-	@Column(name = "working_hours", nullable = false)
-	private Double workingHours;
+	/*
+	 * @Column(name = "working_hours", nullable = false) private Double
+	 * workingHours;
+	 */
 	
+	 @Column(name = "working_hours") 
+	  private String workingHours;
+	 
+	 
 	private boolean enabled;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -53,13 +59,20 @@ public class User {
 	public User() {
 	}
 	
-	public User(String email, String password, String firstName, String lastName, Double workingHours) {
-		this.email = email;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.workingHours = workingHours;
-	}
+	//Contructor for user form
+		public User(String email, String password, String firstName, String lastName) {
+			this.email = email;
+			this.password = password;
+			this.firstName = firstName;
+			this.lastName = lastName;
+		}
+		
+	/*
+	 * public User(String email, String password, String firstName, String lastName,
+	 * Double workingHours) { this.email = email; this.password = password;
+	 * this.firstName = firstName; this.lastName = lastName; this.workingHours =
+	 * workingHours; }
+	 */
 	
 	public void addRole(Role role) {
 		this.roles.add(role);
@@ -113,13 +126,19 @@ public class User {
 		this.jobTitle = jobTitle;
 	}
 
-	public Double getWorkingHours() {
+	public String getWorkingHours() {
 		return workingHours;
 	}
 
-	public void setWorkingHours(Double workingHours) {
+	public void setWorkingHours(String workingHours) {
 		this.workingHours = workingHours;
 	}
+	/*
+	 * public Double getWorkingHours() { return workingHours; }
+	 * 
+	 * public void setWorkingHours(Double workingHours) { this.workingHours =
+	 * workingHours; }
+	 */
 
 	public boolean isEnabled() {
 		return enabled;
