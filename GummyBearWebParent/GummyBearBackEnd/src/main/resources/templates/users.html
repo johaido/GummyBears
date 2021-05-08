@@ -61,7 +61,7 @@
         [[${message}]]
     </div>
     
-	<br>
+
 	
 	<div>
 		<table class="table table-bordered table-striped table-hover table-responsive-xL">
@@ -78,7 +78,7 @@
 				</tr>
 			</thead> 
 			
-			<tbody>
+						<tbody>
 				<tr th:each="user : ${listUsers}">
 					<td>[[${user.id}]]</td>
 					<td>[[${user.firstName}]]</td>
@@ -87,32 +87,30 @@
 					<td>[[${user.enabled}]]</td>
 					<td>[[${user.roles}]]</td>
 					<td>[[${user.jobTitle}]]</td>
-					<td>[[${user.workingHours}]]</td>
-					
-					<!-- Update enable icon with modified url -->
+
+					<!--modify url-->
 					<td>
-						<a th:if="${user.enabled == true}" class="fas fa-check-circle fa-2x icon-green" 
+						<a th:if="${user.enabled == true}" class="fas fa-check-circle  icon-green" 
 						th:href="@{'/users/' + ${user.id} + '/enabled/false'}"
 						title="Disable this user"></a>
 
-						<a th:if="${user.enabled == false}" class="fas fa-circle fa-2x icon-dark" 
+						<a th:if="${user.enabled == false}" class="fas fa-circle  icon-dark" 
 						th:href="@{'/users/' + ${user.id} + '/enabled/true'}"
 						title="Enable this user"></a>
 					</td>
+						<!-- <td>[[${user.workingHours}]]</td>-->
+					<td></td>
 
-					
-					
 					<!--Thitari-->
-					<!--edit from S32-->
 					<td>
-					<a class="fas fa-edit fa-2x icon green" th:href="@{'/users/edit/' + ${user.id}}"
+					<a class="fas fa-edit  icon green" th:href="@{'/users/edit/' + ${user.id}}"
 					title="Edit this user"></a>
 					&nbsp;
 					<!-- update hibernate link and set Title (S33 6048)-->
-					<a class="fas fa-trash fa-2x icon-dark" th:href="@{'/users/delete/' + ${user.id}}"
+					<!-- update delete dialog (S33 1057)-->
+					<a class="fas fa-trash  icon-dark link-delete" th:href="@{'/users/delete/' + ${user.id}}"
 					title="Delete this user"></a>
 					</td>
-					
 				</tr>
 			</tbody>
 		</table>
@@ -123,14 +121,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class ="modal-title">Delete Confirmation</h4>
+					<h4 class="modal-title">Delete Confirmation</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-	
+
 				<div class="modal-body">
 					<span id="confirmText"></span>
 				</div>
-	
+
 				<div class="modal-footer">
 					<a class="btn btn-success" href="" id="yesButton">Yes</a>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
@@ -139,6 +137,7 @@
 		</div>
 	</div>
 	
+	 <!-- Footer -->
 	<div class="text-center">
 		<p> Copyright &copy; GummyBear </p>
 	</div>
@@ -161,7 +160,7 @@
 				//alert($(this).attr("href"));
 				userId = link.attr("userId");
 				$("#yesButton").attr("href", link.attr("href"));
-				$("#con-firmText").text("Are you sure to delete this user " + userId +"?");
+				$("#confirmText").text("Are you sure to delete this user " + userId +"?");
 				$("#confirmModal").modal();
 				//showDeleteConfirmModal($(this), 'user');
 			});
