@@ -10,12 +10,12 @@ import com.gummybear.common.entity.User;
 
 @Repository
 public interface UserRepository extends CrudRepository <User, Integer>{
-	
-	
+
 	/**
 	 * @author Jonas
-	 * 
-	 * */
+	 * @param email
+	 * @return
+	 */
 	@Query("SELECT u FROM User u WHERE u.email = :email")
 	public User getUserByEmail(@Param("email") String email);
 	
@@ -26,10 +26,17 @@ public interface UserRepository extends CrudRepository <User, Integer>{
 	 * Thus we do not have to specify any sql statement or any query 
 	 * and parse the parameter id in this method
 	 */
-	public Long countById(Integer id); 
+	public Long countById(Integer id);
 	
+	/**
+	 * @author Jonas
+	 * @param id
+	 * @param enabled
+	 */
 	@Query("UPDATE User u SET u.enabled = ?2 WHERE u.id = ?1")
 	@Modifying
 	public void updateEnabledStatus(Integer id, boolean enabled);
+
+	
 
 }

@@ -8,20 +8,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gummybear.common.entity.Role;
 import com.gummybear.common.entity.User;
+import com.gummybear.common.entity.Role;
+
 
 @Service
 @Transactional
 public class UserService {
-	
-	
+
 	@Autowired
 	private UserRepository userRepo; //update param reop -> userRepo
-	
-	/**
-	 * @author Thitari
-	 */
+
+
 	@Autowired
 	private RoleRepository roleRepo;
 	
@@ -31,7 +29,7 @@ public class UserService {
 	public List<User> listAll() {
 		return (List<User>) userRepo.findAll();
 	}
-
+	
 	/**
 	 * @author Thitari
 	 */
@@ -47,7 +45,7 @@ public class UserService {
 		boolean isUpdatingUser = (user.getId() != null);
 		if (isUpdatingUser) {
 			User existingUser = userRepo.findById(user.getId()).get();
-			
+
 			/**
 			 * Check if password on the form is empty or not
 			 * if Empty -> The password is unchanged
@@ -56,50 +54,42 @@ public class UserService {
 			if(user.getPassword().isEmpty()) {
 				user.setPassword(existingUser.getPassword());
 			}else {
-				encodePassword(user);
+				encoderPassword(user);
 			}
 		}else {
-			encodePassword(user);
+			encoderPassword(user);
 		}
-		
+
 		userRepo.save(user);
 	}
-	
 
-	private void encodePassword(User user) {
-		String encodePassword = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encodePassword);
+	private void encoderPassword(User user) {
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
 	}
-
+	
 	/**
 	 * @author Thitari
 	 */
 	public boolean isEmailUnique(Integer id, String email) {
 		User userByEmail = userRepo.getUserByEmail(email);
-		/**
-		 * user is found with the email 
-		 * which means Email is unique in DB
-		 */
 		if(userByEmail == null) return true;
 		/**
 		 * if id is null means that the form in new modal
-		 * otherwise means that user is being edited.
+		 * otherwise means user is being edited.
 		 */
 		boolean isCreatingNew = (id == null);
-		
 		if(isCreatingNew) {
-			if (userByEmail != null) return false;
-		}// other user has this email
-			else {
-				if (userByEmail.getId() != id) {
-					return false;//the email is not unique
-				}
+			if(userByEmail != null) return false;
+		}else {
+			//Email is not unique
+			if(userByEmail.getId() != id) {
+				return false;
 			}
-			return true;
-		//}
-		//return userByEmail == null;
+		}
+		return true;
 	}
-	
+
 	/**
 	 * @author Thitari
 	 * @param id
@@ -113,7 +103,7 @@ public class UserService {
 		}
 	}
 
-	
+
 	/**
 	 * @author Thitari
 	 * @param id - parse the given Id
@@ -130,10 +120,9 @@ public class UserService {
 		userRepo.deleteById(id);
 	}
 	
-	/**
-	 * @author Thitari
-	 */
-	public void updateUserEnabledStatus(Integer id, boolean enabled) {
+	public void updateUserEnableStatus(Integer id, boolean enabled) {
 		userRepo.updateEnabledStatus(id, enabled);
 	}
+
 }
+

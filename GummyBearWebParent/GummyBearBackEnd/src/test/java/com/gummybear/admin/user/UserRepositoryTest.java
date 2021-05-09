@@ -17,71 +17,70 @@ import com.gummybear.common.entity.User;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
 public class UserRepositoryTest {
-	
+
 	@Autowired
 	private UserRepository repo;
-	
+
 	@Autowired
 	private TestEntityManager entityManager;
-	
+
 	@Test
 	public void testCreateUserWithOneRole() {
 		Role roleAdmin = entityManager.find(Role.class, 1);
-		//User userJohnDoe = new User("johndoe@gummybear.com", "password12345", "John", "Doe", 8.0);
-		User userJohnDoe = new User("johndoe@gummybear.com", "password12345", "John", "Doe");
+		User userJohnDoe = new User("John@gummybear.com", "1234567890", "John", "Doe");
 		userJohnDoe.addRole(roleAdmin);
-		
+
 		User savedUser = repo.save(userJohnDoe);
 		assertThat(savedUser.getId()).isGreaterThan(0);
 	}
-	
+
 	@Test
 	public void testCreateUserWithTwoRoles() {
 		Role roleAdmin = new Role(1);
 		Role roleEmployee = new Role(2);
-		//User userHarryPotter = new User("harrypotter@gummybear.com", "password12345", "Harry", "Potter", 4.0);
 		User userHarryPotter = new User("harrypotter@gummybear.com", "password12345", "Harry", "Potter");
 		userHarryPotter.addRole(roleAdmin);
 		userHarryPotter.addRole(roleEmployee);
-		
+
 		User savedUser = repo.save(userHarryPotter);
-		
+
 		assertThat(savedUser.getId()).isGreaterThan(0);
 	}
-	
+
 	@Test
 	public void testListAllUsers() {
 		Iterable<User> listUsers = repo.findAll();
 		listUsers.forEach(user -> System.out.print(user));
 	}
-	
+
 	@Test
 	public void testGetUserById() {
 		User firstUser = repo.findById(1).get();
 		System.out.println(firstUser);
 		assertThat(firstUser).isNotNull();
 	}
-	
+
 	@Test
 	public void testUpdateUserDetails() {
 		User userFirst = repo.findById(1).get();
 		userFirst.setEnabled(true);
-		userFirst.setEmail("firstUser@gammybear.com");
+		userFirst.setEmail("John@gammybear.com");
 		repo.save(userFirst);
 	}
-	
+
 	@Test 
 	public void testUpdateRoles() {
 		User userJohnDoe = repo.findById(1).get();
 		Role roleAdmin = new Role(1);
 		Role roleEmployee = new Role(2);
-		userJohnDoe.addRole(roleEmployee);
 		userJohnDoe.getRoles().remove(roleAdmin);
-		// for some reasons getRoles().remove() doesn't work??
-		System.out.println(userJohnDoe.getRoles());
+		userJohnDoe.addRole(roleEmployee);
+		// for some reasons getRoles().remove() doesn't work?? -> work now (swicth lines between addRoles // getRoles)
+		
+		//System.out.println(userJohnDoe.getRoles());
 		repo.save(userJohnDoe);
 	}
-	
+
 	@Test
 	public void testDeleteUser() { 
 		Integer userId = 1;
@@ -92,40 +91,33 @@ public class UserRepositoryTest {
 	 * @author Thitari
 	 */
 	@Test
-	public void testCountById() {
-		//Integer id  = 100; //right now is no user with ID 100 that exist in the DB ->Thus it should failed when you run the test
-		Integer id = 1; //It will success
-		Long countById = repo.countById(id);
-		assertThat(countById).isNotNull().isGreaterThan(0);
+	public void testGetUserByEmail() {
+		String email = "another@gmail.com";
+		User user = repo.getUserByEmail(email);
+		assertThat(user).isNotNull();		
 	}
 	
-	/**
-	 * @author Thitari
-	 * Testing disable
-	 */
+	@Test
+	public void testCountById() {
+		//Integer id = 100;
+		Integer id = 1;
+		Long countById = repo.countById(id);	
+		
+		assertThat(countById).isNotNull().isGreaterThan(0);
+		}
+	
+	
 	@Test
 	public void testDisableUser() {
-		Integer id = 1;
+		Integer id = 4;
 		repo.updateEnabledStatus(id, false);
 	}
 	
-	/***
-	 * @author Thitari
-	 * Testing enable user
-	 */
 	@Test
 	public void testEnableUser() {
-		Integer id = 3;
+		Integer id = 10;
 		repo.updateEnabledStatus(id, true);
 	}
 	
-	@Test
-	public void testGetUserByEmail( ) {
-		String email = "abc@de.fg";
-		User user = repo.getUserByEmail(email);
-		
-		assertThat(user).isNotNull();
-	}
 	
-
 }

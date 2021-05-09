@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "roles")
 public class Role {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -38,6 +38,7 @@ public class Role {
 		this.name = name;
 		this.description = description;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -68,7 +69,6 @@ public class Role {
 		return this.name;
 	}
 
-	//for ID
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,7 +77,6 @@ public class Role {
 		return result;
 	}
 
-	//for ID
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -94,7 +93,5 @@ public class Role {
 			return false;
 		return true;
 	}
-
-	
 
 }

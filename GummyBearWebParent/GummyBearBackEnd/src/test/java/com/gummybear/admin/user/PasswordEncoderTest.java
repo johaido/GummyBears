@@ -9,13 +9,14 @@ public class PasswordEncoderTest {
 	@Test
 	public void testEncodePassword() {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String rawPassword = "ToBIT2021";
+		String rawPassword = "password12345"; 
 		String encodedPassword = passwordEncoder.encode(rawPassword);
-		
+
 		System.out.println(encodedPassword);
-		
-		boolean matches = passwordEncoder.matches(rawPassword, encodedPassword);
-		
+
+		boolean matches =  passwordEncoder.matches(rawPassword, encodedPassword);
+
 		assertThat(matches).isTrue();
 	}
+
 }

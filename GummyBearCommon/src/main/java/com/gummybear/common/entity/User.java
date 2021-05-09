@@ -17,38 +17,38 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; 
-	
+
 	@Column(length = 128, nullable = false, unique = true)
 	private String email;
-	
+
 	@Column(length = 64, nullable = false)
 	private String password;
-	
+
 	@Column(name = "first_name", length = 45, nullable = false)
 	private String firstName;
-	
+
 	@Column(name = "last_name", length = 45, nullable = false)
 	private String lastName;
-	
+
 	@Column(name = "job_title", length = 64)
 	private String jobTitle;
-	
+
 	/*
 	 * @Column(name = "working_hours", nullable = false) private Double
 	 * workingHours;
 	 */
-	
-	 @Column(name = "working_hours") 
-	  private String workingHours;
-	 
+		
+	@Column(name = "working_hours") private String workingHours;
+		 
+	  
 	 
 	private boolean enabled;
-	
-	@ManyToMany(fetch = FetchType.LAZY)
+
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "users_roles",
 			joinColumns = @JoinColumn(name = "user_id"),
@@ -57,16 +57,10 @@ public class User {
 	private Set<Role> roles = new HashSet<>();
 
 	public User() {
+	
 	}
 	
-	//Contructor for user form
-		public User(String email, String password, String firstName, String lastName) {
-			this.email = email;
-			this.password = password;
-			this.firstName = firstName;
-			this.lastName = lastName;
-		}
-		
+	
 	/*
 	 * public User(String email, String password, String firstName, String lastName,
 	 * Double workingHours) { this.email = email; this.password = password;
@@ -74,10 +68,18 @@ public class User {
 	 * workingHours; }
 	 */
 	
+	public User(String email, String password, String firstName, String lastName) {
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+
 	public void addRole(Role role) {
 		this.roles.add(role);
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -126,19 +128,22 @@ public class User {
 		this.jobTitle = jobTitle;
 	}
 
-	public String getWorkingHours() {
-		return workingHours;
-	}
-
-	public void setWorkingHours(String workingHours) {
-		this.workingHours = workingHours;
-	}
 	/*
 	 * public Double getWorkingHours() { return workingHours; }
 	 * 
 	 * public void setWorkingHours(Double workingHours) { this.workingHours =
 	 * workingHours; }
 	 */
+
+	public String getWorkingHours() {
+		return workingHours;
+	}
+
+
+	public void setWorkingHours(String workingHours) {
+		this.workingHours = workingHours;
+	}
+
 
 	public boolean isEnabled() {
 		return enabled;
@@ -155,7 +160,7 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
