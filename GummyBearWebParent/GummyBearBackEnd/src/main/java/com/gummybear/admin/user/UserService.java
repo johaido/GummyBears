@@ -120,6 +120,9 @@ public class UserService {
 		userRepo.deleteById(id);
 	}
 	
+	/**
+	 * @author Thitari
+	 */
 	public void updateUserEnableStatus(Integer id, boolean enabled) {
 		userRepo.updateEnabledStatus(id, enabled);
 	}
