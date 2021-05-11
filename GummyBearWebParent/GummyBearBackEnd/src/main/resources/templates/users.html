@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Initial implementaion of the users HTML page by Olga --> 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,16 +30,12 @@
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/users/}">Users</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/newuser/}">New User</a>
-						</li>
 						<li>
 							<span class="fas fa-user fa-2x icon-silver"> </span>
 						</li>
 						<li class="nav-item">
-						<a class="nav-link" sec:authentication="principal.fullname" ></a>
-					</li>
-						
+							<a class="nav-link" sec:authentication="principal.fullname" ></a>
+						</li>
 					</ul>
 				</div>
 			</nav> 
