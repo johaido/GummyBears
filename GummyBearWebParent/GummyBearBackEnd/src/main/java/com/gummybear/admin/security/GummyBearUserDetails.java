@@ -16,11 +16,11 @@ import com.gummybear.common.entity.User;
  * @author Jonas
  *
  */
-public class GummybearUserDetails implements UserDetails {
+public class GummyBearUserDetails implements UserDetails {
 
 	private User user;
 	
-	public GummybearUserDetails(User user) {
+	public GummyBearUserDetails(User user) {
 		this.user = user;
 	}
 	

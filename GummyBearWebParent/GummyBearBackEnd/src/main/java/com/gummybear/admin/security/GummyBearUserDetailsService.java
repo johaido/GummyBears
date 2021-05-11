@@ -12,7 +12,7 @@ import com.gummybear.common.entity.User;
  * @author Jonas
  *
  */
-public class GummybearUserDetailsService implements UserDetailsService {
+public class GummyBearUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepo;
@@ -21,7 +21,7 @@ public class GummybearUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		User user = userRepo.getUserByEmail(email);
 		if(user != null) {
-			return new GummybearUserDetails(user);
+			return new GummyBearUserDetails(user);
 		}
 			throw new UsernameNotFoundException("Could not find user with email: " + email);
 	}

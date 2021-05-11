@@ -18,22 +18,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 @EnableWebSecurity
-public class WebScurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return new GummybearUserDetailsService();
+		return new GummyBearUserDetailsService();
 	}
 	
 	@Bean
-	public PasswordEncoder passwordEndCoder() {
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 		authProvider.setUserDetailsService(userDetailsService());
-		authProvider.setPasswordEncoder(passwordEndCoder());
+		authProvider.setPasswordEncoder(passwordEncoder());
 		return authProvider;
 	}
 
@@ -42,10 +42,12 @@ public class WebScurityConfig extends WebSecurityConfigurerAdapter {
 			 auth.authenticationProvider(authenticationProvider());
 	}
 
-	/*
-	 * @Override protected void configure(HttpSecurity http) throws Exception {
-	 * http.authorizeRequests().anyRequest().permitAll(); }
-	 */
+	
+//	 @Override 
+//	 protected void configure(HttpSecurity http) throws Exception {
+//		 http.authorizeRequests().anyRequest().permitAll(); 
+//	 }
+	 
 	
 	@Override 
 	  protected void configure(HttpSecurity http) throws Exception {
@@ -60,6 +62,12 @@ public class WebScurityConfig extends WebSecurityConfigurerAdapter {
 				.key("AbcDefgHijKlmnOpqrs_1234567890")
 				.tokenValiditySeconds(7 * 24 * 60 * 60); //7days 24hrs 60Min 60Sec
 }
+	
+//	@Override protected void configure(HttpSecurity http) throws Exception {
+//		  http.authorizeRequests() .antMatchers("/**").hasRole("Admin")
+//		  .anyRequest().authenticated() .and() .formLogin() .loginPage("/login")
+//		  .usernameParameter("email") .and().logout().permitAll(); }
+	
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
