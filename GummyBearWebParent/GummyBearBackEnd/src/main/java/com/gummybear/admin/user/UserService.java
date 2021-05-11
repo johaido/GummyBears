@@ -11,7 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gummybear.common.entity.User;
 import com.gummybear.common.entity.Role;
 
-
+/**
+ * Performs operations on the User Repository (DB).
+ * @author Olga
+ *
+ */
 @Service
 @Transactional
 public class UserService {

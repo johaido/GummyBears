@@ -13,12 +13,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.gummybear.common.entity.Role;
 import com.gummybear.common.entity.User;
 
+/**
+ * Prepares Model to pass it to Views.
+ * @author Olga
+ *
+ */
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserService service;
-
+	
+	
+	/**
+	 * List all users stored in the DB.
+	 * author Olga
+	 * @param model
+	 * @return the name of the view to be used to render the model.
+	 * 
+	 */
 	@GetMapping("/users")
 	public String listAll(Model model) {
 		List<User> listUsers = service.listAll();
