@@ -8,11 +8,18 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
 import com.gummybear.common.entity.Role;
 import com.gummybear.common.entity.User;
 
+/**
+ * Unit tests to validate User and UserRepository classes and 
+ * to verify that communication with the DB works correctly.
+ * @author Olga
+ *
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
@@ -29,7 +36,9 @@ public class UserRepositoryTest {
 		Role roleAdmin = entityManager.find(Role.class, 1);
 		User userJohnDoe = new User("John@gummybear.com", "1234567890", "John", "Doe");
 		userJohnDoe.addRole(roleAdmin);
-
+		userJohnDoe.setWorkingHours("8");
+		userJohnDoe.setEnabled(true);
+		
 		User savedUser = repo.save(userJohnDoe);
 		assertThat(savedUser.getId()).isGreaterThan(0);
 	}
@@ -41,12 +50,14 @@ public class UserRepositoryTest {
 		User userHarryPotter = new User("harrypotter@gummybear.com", "password12345", "Harry", "Potter");
 		userHarryPotter.addRole(roleAdmin);
 		userHarryPotter.addRole(roleEmployee);
+		userHarryPotter.setWorkingHours("8");
+		userHarryPotter.setEnabled(true);
 
 		User savedUser = repo.save(userHarryPotter);
-
 		assertThat(savedUser.getId()).isGreaterThan(0);
 	}
-
+	
+	
 	@Test
 	public void testListAllUsers() {
 		Iterable<User> listUsers = repo.findAll();
@@ -102,9 +113,8 @@ public class UserRepositoryTest {
 		//Integer id = 100;
 		Integer id = 1;
 		Long countById = repo.countById(id);	
-		
 		assertThat(countById).isNotNull().isGreaterThan(0);
-		}
+	}
 	
 	/**
 	 * @author Thitari
@@ -126,5 +136,57 @@ public class UserRepositoryTest {
 		repo.updateEnabledStatus(id, true);
 	}
 	
+	// Store the passwords in the encrypted form in the DB
+	// the Spring security mechanism will encrypt the password provided by the user in the login page 
+	// and compare it with the encrypted password stored in the DB
+	@Test
+	public void testEncryptedPasswordAdmin() {
+		Role roleAdmin = new Role(1);
+		Role roleEmployee = new Role(2);
+		User newUser = new User();
+		newUser.setEmail("bob@gummybear.com");
+		newUser.setFirstName("Bob");
+		newUser.setLastName("Mallow");
+		newUser.setWorkingHours("8");
+		newUser.setEnabled(true);
+		newUser.addRole(roleAdmin);
+		newUser.addRole(roleEmployee);
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String rawPassword = "password12345"; 
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		System.out.println(encodedPassword);
+		boolean matches =  passwordEncoder.matches(rawPassword, encodedPassword);
+		
+		newUser.setPassword(encodedPassword);
+		
+		User savedUser = repo.save(newUser);
+		assertThat(savedUser.getId()).isGreaterThan(0);
+	}
 	
+	// Store the passwords in the encrypted form in the DB
+	// the Spring security mechanism will encrypt the password provided by the user in the login page 
+	// and compare it with the encrypted password stored in the DB
+	@Test
+	public void testEncryptedPasswordNonAdmin() {
+		Role roleEmployee = new Role(2);
+		User newUser = new User();
+		newUser.setEmail("leodicaprio@gummybear.com");
+		newUser.setFirstName("Leo");
+		newUser.setLastName("DiCaprio");
+		newUser.setWorkingHours("8");
+		newUser.setEnabled(true);
+		newUser.addRole(roleEmployee);
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String rawPassword = "qwerty"; 
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		System.out.println(encodedPassword);
+		boolean matches =  passwordEncoder.matches(rawPassword, encodedPassword);
+		
+		newUser.setPassword(encodedPassword);
+		
+		User savedUser = repo.save(newUser);
+		assertThat(savedUser.getId()).isGreaterThan(0);
+	}
 }

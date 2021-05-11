@@ -13,8 +13,12 @@ import org.springframework.test.annotation.Rollback;
 
 import com.gummybear.common.entity.Role;
 
-
-
+/**
+ * Unit tests to validate Role and RoleRepository classes and 
+ * to verify that communication with the DB works correctly.
+ * @author Olga
+ *
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
@@ -25,21 +29,25 @@ public class RoleRepositoryTest {
 
 	//Admin Role
 	@Test
-	public void testCreateFirstRole() {
+	public void testCreateAdminRole() {
 		Role roleAdmin = new Role("Admin", "Manage employee accounts");
 		Role savedRole = repo.save(roleAdmin);
-
 		assertThat(savedRole.getId()).isGreaterThan(0);
 	}
 	
 	//Other Roles
-			@Test
-			public void testCreateOtherRoles() {
-				//Role roleAdmin = new Role("Admin", "Manage employee accounts");
-				Role roleEmployee = new Role("Employee", "Company employee");
-				//Role roleManager = new Role("Manager", "See employee time staement reports");
-				//repo.saveAll(List.of(roleAdmin, roleEmployee));
-				repo.saveAll(List.of(roleEmployee));
-			}
-		
+	@Test
+	public void testCreateEmployeeRole() {
+		Role roleEmployee = new Role("Employee", "Company employee");
+		Role savedRole = repo.save(roleEmployee);
+		assertThat(savedRole.getId()).isGreaterThan(0);
+	}
+	
+	// Adding multiple roles at once.
+//	@Test
+//	public void testCreateTwoRoles() {
+//		Role roleAdmin = new Role("Admin", "Manage employee accounts");
+//		Role roleEmployee = new Role("Employee", "Company employee");
+//		repo.saveAll(List.of(roleAdmin, roleEmployee));
+//	}
 }
