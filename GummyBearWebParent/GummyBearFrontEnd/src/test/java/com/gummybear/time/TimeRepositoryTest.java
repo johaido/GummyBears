@@ -2,8 +2,11 @@ package com.gummybear.time;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +15,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
+import com.gummybear.common.entity.TimeDifference;
 import com.gummybear.common.entity.TimeStamp;
+import com.gummybear.common.entity.TimeStampNew;
 
 /**
  * Unit tests for TimeStamp and TimeRepository classes.
@@ -25,6 +30,9 @@ public class TimeRepositoryTest {
 	
 	@Autowired
 	private TimeRepository repo;
+	
+	@Autowired
+	private TimeRepositoryNew repoNew;
 
 	@Test
 	public void testDateMethods() throws InterruptedException {
@@ -66,4 +74,41 @@ public class TimeRepositoryTest {
 		TimeStamp savedRecord = repo.save(ts);
 		assertThat(savedRecord.getId()).isGreaterThan(0);
 	}
+	
+	@Test
+	public void testAddTimeStampNew() throws InterruptedException {
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		TimeStampNew ts = new TimeStampNew();
+	    ts.setDate(date);
+	    ts.setTimestamp(calendar);
+	    ts.setEvent("in");
+	    ts.setUserid(1);
+	    repoNew.save(ts);
+	    
+	    Thread.sleep(10000);
+	    
+		Date date2 = new Date();
+		Calendar calendar2 = Calendar.getInstance();
+		calendar2.setTime(date2);
+	    TimeStampNew ts2 = new TimeStampNew();
+	    ts2.setDate(date2);
+	    ts2.setTimestamp(calendar2);
+	    ts2.setEvent("out");
+	    ts2.setUserid(1);
+	    repoNew.save(ts2);
+	}
+	
+	@Test
+	public void testTimeDifference() {
+		List<TimeDifference> td = repoNew.calculateTimeDifference();
+		System.out.println("id: " + td.get(1).getId());
+		System.out.println("userid: " + td.get(1).getUserid());
+		System.out.println("date: " + td.get(1).getDate());
+		System.out.println("start_time: " + td.get(1).getStartTime());
+		System.out.println("end_time: " + td.get(1).getEndTime());
+		System.out.println("time_diff: " + td.get(1).getTimeDiff());
+	}
+	
 }

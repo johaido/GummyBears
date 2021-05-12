@@ -70,7 +70,7 @@
 	
 	<div class="text-left">
 		<h2 style= "color:grey; margin-left: 10px"> Register Working Hours</h2>
-		<form th:action="@{/checkin}" method="post">
+		<form th:action="@{/checkin}" method="post" th:object="${user}">
 			<input type="submit" value="Check-In" class="btn btn-success m-2"/> 
 		</form>
 		
@@ -80,6 +80,37 @@
 		<hr>
 		<p style="margin-left: 10px;"> Login time: <span id='date-time'> </span>. </p>
 	</div>
+	
+	
+	<div>
+		<h2> Time Overview</h2>
+	</div>
+	
+	<br>
+
+	<div>
+		<table class="table table-bordered table-striped table-hover table-responsive-xL">
+			<thead class="thead-dark">
+				<tr>
+					<th> Event Id </th> 
+					<th> Start Time </th>
+					<th> End Time </th>
+					<th> Difference </th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="td : ${listTimeDifference}">
+					<td th:text="${td.id}"></td>
+					<td th:text="${#calendars.format(td.startTime, 'yyyy/MM/dd HH:mm')}"></td>
+					<td th:text="${#calendars.format(td.endTime, 'yyyy/MM/dd HH:mm')}"></td>
+					<td th:text="${td.timeDiff}"></td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+	
 
 	
 	<div class="text-center">
