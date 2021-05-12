@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.gummybear.common.entity.User;
 import com.gummybear.common.entity.Role;
 
+
 public class GummyBearUserDetails implements UserDetails {
 	
 	private User user;
@@ -64,6 +65,30 @@ public class GummyBearUserDetails implements UserDetails {
 	
 	public String getFullname() {
 		return this.user.getFirstName() + " " + this.user.getLastName();
+	}
+	
+	/**
+	 * Simple getter to extract user's first name.
+	 * @author Olga
+	 */
+	public String getFirstname() {
+		return this.user.getFirstName();
+	}
+	
+	/**
+	 * Simple getter to extract user's last name.
+	 * @author Olga
+	 */
+	public String getLastname() {
+		return this.user.getLastName();
+	}
+	
+	/**
+	 * Simple getter to extract user's working hours.
+	 * @author Olga
+	 */
+	public String getWorkinghours() {
+		return this.user.getWorkingHours();
 	}
 
 }
