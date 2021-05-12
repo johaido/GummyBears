@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+
+<!-- @author Olga --> 
+
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-	<title>Home - GummyBear Admin</title>
+	<title>Home - GummyBear Employee</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
@@ -51,29 +54,49 @@
 		</div>						
 	</div>
 	
-	<br>
-	
 	<div>
-		<h1>Emplyoee Time Tracking</h1>
+		<h2 style= "color:grey; margin-left: 10px"> Employee Information</h2>
 	</div>
 	
+	<div th:if="${message != null}" class="alert alert-success text-center">
+		[[${message}]]
+	</div>
+	
+	<hr>
+	
+	<div class="text-left">
+		<label style= "color:grey; margin-left: 10px; font-size: 1.2em"> Register Working Hours: </label>
+		
+		<form th:action="@{/checkin}" method="post">
+			<input type="submit" value="Check-In" class="btn btn-success m-1"/> 
+		</form>
+		
+		<form th:action="@{/checkout}" method="post">
+			<input type="submit" value="Check-Out" class="btn btn-danger m-1"/> 
+		</form>
+		
+	</div>
+
+	
 	<div class="text-center">
-  	<h3>Welcome to The Gummy bears</h3>
+		<h3>Welcome to The GummyBear Company</h3>
   	</div>
 	
-	<!-- Footer -->
 	<div class="text-center">
 		<p> Copyright &copy; GummyBear </p>
 	</div>
+	
+	<!--TODO: remove script below as not used-->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#buttonCheckin").on("click", function() {
+				console.log("hello");
+				link = $(this);
+				console.log(link);
+				window.location = "[[@{/}]]";
+			});
+		}); 
+	</script>
 
-<!-- Logout/Jonas -->	
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#logoutLink").on("click", function(e) {
-			e.preventDefault();
-			document.logoutForm.submit();
-		});
-	});
-</script>
 </body>
 </html>

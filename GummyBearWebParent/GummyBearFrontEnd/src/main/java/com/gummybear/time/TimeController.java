@@ -57,4 +57,19 @@ public class TimeController {
 //		return "timetracking";
 //	}
 	
+	/**
+	 * @author Jonas
+	 */
+	@GetMapping("/timeoverview")
+	public String viewTime() {
+		//List<Timestatement> listTime = service.listAll();
+		//model.addAllAttributes("listTime", listTime);
+		return "timeoverview";
+	}
+	
+	@GetMapping("/timetracking")
+	public String trackTime() {
+		return "timetracking";
+	}
+	
 }

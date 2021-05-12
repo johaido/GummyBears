@@ -164,6 +164,29 @@ public class UserRepositoryTest {
 		assertThat(savedUser.getId()).isGreaterThan(0);
 	}
 	
+	@Test
+	public void testEncryptedPasswordEmployee() {
+		Role roleEmployee = new Role(2);
+		User newUser = new User();
+		newUser.setEmail("anna@gummybear.com");
+		newUser.setFirstName("Anna");
+		newUser.setLastName("Mallow");
+		newUser.setWorkingHours("8");
+		newUser.setEnabled(true);
+		newUser.addRole(roleEmployee);
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String rawPassword = "password12345"; 
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		System.out.println(encodedPassword);
+		boolean matches =  passwordEncoder.matches(rawPassword, encodedPassword);
+		
+		newUser.setPassword(encodedPassword);
+		
+		User savedUser = repo.save(newUser);
+		assertThat(savedUser.getId()).isGreaterThan(0);
+	}
+	
 	// Store the passwords in the encrypted form in the DB
 	// the Spring security mechanism will encrypt the password provided by the user in the login page 
 	// and compare it with the encrypted password stored in the DB
