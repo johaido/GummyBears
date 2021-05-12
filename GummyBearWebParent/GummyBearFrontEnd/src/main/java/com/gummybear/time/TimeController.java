@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.gummybear.common.entity.TimeStamp;
 import com.gummybear.common.entity.User;
 
 @Controller
@@ -17,15 +18,24 @@ public class TimeController {
 	
 	/**
 	 * @author Olga
+	 * @return
+	 */
+	@GetMapping("/index")
+	public String home() {
+		return "index";
+	}
+	
+	/**
+	 * @author Olga
 	 * @param model
 	 * @param redirectAttributes
 	 * @return
 	 */
 	@PostMapping("/checkin")
 	public String checkIn(Model model, RedirectAttributes redirectAttributes) {
-		service.save(true);
-		redirectAttributes.addFlashAttribute("message", "The Check-in time was registered succesfully.");
-		return "redirect:/";
+		TimeStamp ts = service.save(true);
+		redirectAttributes.addFlashAttribute("message", "The Check-In time of " + ts.toString() + " was registered succesfully.");
+		return "redirect:/timetracking/";
 	}
 	
 	/**
@@ -37,9 +47,9 @@ public class TimeController {
 	 */
 	@PostMapping("/checkout")
 	public String checkOut(Model model, RedirectAttributes redirectAttributes) {
-		service.save(false);
-		redirectAttributes.addFlashAttribute("message", "The Check-out time was registered succesfully.");
-		return "redirect:/";
+		TimeStamp ts = service.save(false);
+		redirectAttributes.addFlashAttribute("message", "The Check-Out time of " + ts.toString() + " was registered succesfully.");
+		return "redirect:/timetracking/";
 	}
 	
 	

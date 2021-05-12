@@ -22,7 +22,7 @@ public class TimeService {
 	 * Save year, month, day, hour and minute of the time stamp in the DB.
 	 * @author Olga
 	 */
-	public void save(boolean eventType) {
+	public TimeStamp save(boolean eventType) {
 		Date date = new Date();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
@@ -36,6 +36,7 @@ public class TimeService {
 		// TODO: when user login id will be available it will be passed to the constructor to link time stamp to specific user
 		TimeStamp ts = new TimeStamp(year, month, day, hour, minute, eventType);
 		timeRepo.save(ts);
+		return(ts);
 	}
 
 }
