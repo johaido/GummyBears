@@ -109,4 +109,13 @@ public class TimeStamp {
 	public void setEventType(boolean eventType) {
 		this.eventType = eventType;
 	}
+	
+	@Override
+	public String toString() {
+		String min = Integer.toString(this.minute);
+		if (min.length() == 1) {
+			min = "0" + min;
+		}
+		return this.day + "/" + this.month + "/" + this.year + ", " + this.hour + ":" + min; 
+	}
 }
