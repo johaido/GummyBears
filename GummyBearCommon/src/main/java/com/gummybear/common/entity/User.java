@@ -14,6 +14,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+/**
+ * Class to construct users table in the DB.
+ * @author Olga
+ */
 @Entity
 @Table(name = "users")
 public class User {

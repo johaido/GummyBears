@@ -7,8 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
+/**
+ * Class to construct roles table in the DB.
+ * @author Olga
+ */
 @Entity
 @Table(name = "roles")
 public class Role {

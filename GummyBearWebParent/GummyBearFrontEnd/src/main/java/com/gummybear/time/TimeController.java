@@ -1,6 +1,5 @@
 package com.gummybear.time;
 
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gummybear.common.entity.TimeDifference;
 import com.gummybear.common.entity.TimeStamp;
-import com.gummybear.common.entity.TimeStampNew;
 import com.gummybear.common.entity.User;
 import com.gummybear.user.UserRepository;
 
@@ -36,36 +34,7 @@ public class TimeController {
 	public String home() {
 		return "index";
 	}
-	
-	/**
-	 * @author Olga
-	 * @param model
-	 * @param redirectAttributes
-	 * @return
-	 */
-//	@PostMapping("/checkin")
-//	public String checkIn(User user, Model model, RedirectAttributes redirectAttributes) {
-//		System.out.println("User Name: " + user.getId());
-//		TimeStamp ts = service.save(true);
-//		redirectAttributes.addFlashAttribute("message", "The Check-In time of " + ts.toString() + " was registered succesfully.");
-//		return "redirect:/timetracking/";
-//	}
-	
-	/**
-	 * 
-	 * @author Olga
-	 * @param model
-	 * @param redirectAttributes
-	 * @return
-	 */
-//	@PostMapping("/checkout")
-//	public String checkOut(Model model, RedirectAttributes redirectAttributes) {
-//		TimeStamp ts = service.save(false);
-//		redirectAttributes.addFlashAttribute("message", "The Check-Out time of " + ts.toString() + " was registered succesfully.");
-//		return "redirect:/timetracking/";
-//	}
-	
-	
+		
 	/**
 	 * @author Olga
 	 */
@@ -74,7 +43,7 @@ public class TimeController {
 		User user = (User) userRepo.getUserByEmail(currentUser.getUsername());
 		System.out.println("User ID: " + user.getId());
 		System.out.println("User name: " + user.getFirstName());
-		TimeStampNew ts = service.save(user.getId(), "in");
+		TimeStamp ts = service.save(user.getId(), "in");
 		redirectAttributes.addFlashAttribute("message", "The Check-In time of " + ts.toString() + " was registered succesfully.");
 		return "redirect:/timetracking/";
     }
@@ -87,18 +56,17 @@ public class TimeController {
 		User user = (User) userRepo.getUserByEmail(currentUser.getUsername());
 		System.out.println("User ID: " + user.getId());
 		System.out.println("User name: " + user.getFirstName());
-		TimeStampNew ts = service.save(user.getId(), "out");
+		TimeStamp ts = service.save(user.getId(), "out");
 		redirectAttributes.addFlashAttribute("message", "The Check-Out time of " + ts.toString() + " was registered succesfully.");
 		return "redirect:/timetracking/";
     }
 	
+	/**
+	 * @author Olga
+	 */
 	@GetMapping("/timetracking")
 	public String calculateTimeDifference(Model model) {
 		List<TimeDifference> listTimeDifference = service.calculateTimeDifference();
-		
-		for (TimeDifference td : listTimeDifference) {
-			System.out.println(td.getStartTime().get(Calendar.DATE));
-		}
 		model.addAttribute("listTimeDifference", listTimeDifference);
 		return "timetracking";
 	}	
@@ -112,10 +80,5 @@ public class TimeController {
 		//model.addAllAttributes("listTime", listTime);
 		return "timeoverview";
 	}
-	
-//	@GetMapping("/timetracking")
-//	public String trackTime() {
-//		return "timetracking";
-//	}
-	
+		
 }

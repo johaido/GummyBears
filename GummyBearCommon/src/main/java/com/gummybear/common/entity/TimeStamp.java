@@ -1,5 +1,9 @@
 package com.gummybear.common.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,47 +16,27 @@ import javax.persistence.Table;
  * @author Olga
  */
 @Entity
-@Table(name = "timestamps")
+@Table(name = "timeregister")
 public class TimeStamp {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	   
+	@Column(columnDefinition = "DATETIME", nullable = false, unique = false)
+	private Calendar timestamp;
 	
-	@Column(length = 4, nullable = false, unique = false)
-	private int year;
+	@Column(columnDefinition = "DATE", nullable = false, unique = false)
+	private Date date;
 	
-	@Column(length = 2, nullable = false, unique = false)
-	private int month;
-	
-	@Column(length = 2, nullable = false, unique = false)
-	private int day;
-	
-	@Column(length = 2, nullable = false, unique = false)
-	private int hour;
-	
-	@Column(length = 2, nullable = false, unique = false)
-	private int minute;
+	@Column(nullable = false, unique = false)
+	private int userid;
 	
 	// true means check-in and false means check-out 
 	@Column(nullable = false)
-	private boolean eventType;
-	
-	//TODO: link to the user id table still have to be implemented
+	private String event;
 		
-	public TimeStamp() {
-		
-	}
-
-	public TimeStamp(int year, int month, int day, int hour, int minute, boolean eventType) {
-		super();
-		this.year = year;
-		this.month = month;
-		this.day = day;
-		this.hour = hour;
-		this.minute = minute;
-		this.eventType = eventType;
-	}
+	public TimeStamp() {}
 
 	public Integer getId() {
 		return id;
@@ -62,60 +46,43 @@ public class TimeStamp {
 		this.id = id;
 	}
 
-	public int getYear() {
-		return year;
+	public Calendar getTimestamp() {
+		return timestamp;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public void setTimestamp(Calendar timestamp) {
+		this.timestamp = timestamp;
 	}
 
-	public int getMonth() {
-		return month;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setMonth(int month) {
-		this.month = month;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	public int getDay() {
-		return day;
+	public int getUserid() {
+		return userid;
 	}
 
-	public void setDay(int day) {
-		this.day = day;
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
-	public int getHour() {
-		return hour;
+	public String getEvent() {
+		return event;
 	}
 
-	public void setHour(int hour) {
-		this.hour = hour;
-	}
-
-	public int getMinute() {
-		return minute;
-	}
-
-	public void setMinute(int minute) {
-		this.minute = minute;
-	}
-
-	public boolean isEventType() {
-		return eventType;
-	}
-
-	public void setEventType(boolean eventType) {
-		this.eventType = eventType;
+	public void setEvent(String event) {
+		this.event = event;
 	}
 	
 	@Override
 	public String toString() {
-		String min = Integer.toString(this.minute);
-		if (min.length() == 1) {
-			min = "0" + min;
-		}
-		return this.day + "/" + this.month + "/" + this.year + ", " + this.hour + ":" + min; 
+		SimpleDateFormat tidyFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		String formatted = tidyFormat.format(timestamp.getTime());
+		return formatted;
 	}
+	
 }

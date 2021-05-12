@@ -3,6 +3,10 @@ package com.gummybear.common.entity;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Class to hold time difference information calculated from TimeStamp (timeregister) table.
+ * @author Olga
+ */
 public class TimeDifference {
 	private Integer id;
 	private int userid;
