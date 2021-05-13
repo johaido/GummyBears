@@ -28,11 +28,16 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				
-				<div class="collapse navbar-collapse" id="topNavbar">
-					<ul class="navbar-nav">
+				<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="topNavbar">
+					<ul class="navbar-nav mr-auto">
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/users/}">Users</a>
 						</li>
+					</ul>
+				</div>	
+					
+				<div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="topNavbar">
+					<ul class="navbar-nav ml-auto">
 						<li>
 							<span class="fas fa-user fa-2x icon-silver"> </span>
 						</li>
@@ -45,7 +50,7 @@
 						</li>
 					</ul>
 				</div>
-			</nav> 
+			</nav>  
 		</div>						
 	</div>
 	
