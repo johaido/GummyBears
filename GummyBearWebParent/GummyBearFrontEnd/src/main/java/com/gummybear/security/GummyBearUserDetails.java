@@ -87,7 +87,7 @@ public class GummyBearUserDetails implements UserDetails {
 	 * Simple getter to extract user's working hours.
 	 * @author Olga
 	 */
-	public String getWorkinghours() {
+	public Double getWorkinghours() {
 		return this.user.getWorkingHours();
 	}
 
