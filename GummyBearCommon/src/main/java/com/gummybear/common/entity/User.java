@@ -1,5 +1,6 @@
 package com.gummybear.common.entity;
 
+import java.beans.Transient;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -161,4 +162,14 @@ public class User {
 		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", roles=" + roles + "]";
 	}
+	
+	/**
+	 * @author Thitari
+	 * @return fullname of users in the table 
+	 * when table is responsive -> less-details
+	 */
+	@Transient
+	public String getFullName() {
+		return firstName + " " + lastName;
+	} 
 }

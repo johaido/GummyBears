@@ -60,40 +60,44 @@
 		<h2> Company Employees</h2>
 		<a th:href="@{/users/new}">Create New User</a>
 	</div>
+<div>
+<br>
+</div>
 
 	<div th:if="${message != null}" class="alert alert-success text-center">
 		[[${message}]]
 		</div>
 
-	<div>
-		<table class="table table-bordered table-striped table-hover table-responsive-xL">
+	<div class ="full-details">
+		<table class="table table-bordered table-hover table-responsive-xl">
 			<thead class="thead-dark">
 				<tr> 
-					<th> User ID </th>
-					<th> First Name </th>
-					<th> Last Name </th>
-					<th> Email </th>
-					<th> Enabled Status </th>
-					<th> Role </th>
-					<th> Job Title </th> 
-					<th> Working Hours </th> 
-					<th> Enabled </th>
-					<th></th>
+					<th scope="col"> User ID </th>
+					<th scope="col"> First Name </th>
+					<th scope="col"> Last Name </th>
+					<th scope="col"> Email </th>
+					<th scope="col"> Enabled Status </th>
+					<th scope="col"> Role </th>
+					<th scope="col"> Job Title </th> 
+					<th scope="col"> Working Hours </th> 
+					<th scope="col"> Enabled </th>
+					<th scope="col" ></th>
 				</tr>
 			</thead> 
 
 			<tbody>
-				<tr th:each="user : ${listUsers}">
-					<td>[[${user.id}]]</td>
-					<td>[[${user.firstName}]]</td>
-					<td>[[${user.lastName}]]</td>
-					<td>[[${user.email}]]</td>
-					<td>[[${user.enabled}]]</td>
-					<td>[[${user.roles}]]</td>
-					<td>[[${user.jobTitle}]]</td>
-					<td>[[${user.workingHours}]]</td>
+				<tr th:each="user : ${listUsers}" role="row">
+					<td scope="row" data-label="User ID" >[[${user.id}]]</td>
+					<td data-label="First Name">[[${user.firstName}]]</td>
+					<td data-label="Last Name">[[${user.lastName}]]</td>
+					<td data-label="Email">[[${user.email}]]</td>
+					<td data-label="Enabled Status">[[${user.enabled}]]</td>
+					<td data-label="Role">[[${user.roles}]]</td>
+					<td data-label="Job Title">[[${user.jobTitle}]]</td>
+					<td data-label="Working hours">[[${user.workingHours}]]</td>
+					
 					<!--modify enabled-->
-					<td>
+					<td data-label="Enabled">
 						<a th:if="${user.enabled == true}" class="fas fa-check-circle  icon-green" 
 						th:href="@{'/users/' + ${user.id} + '/enabled/false'}"
 						title="Disable this user"></a>
@@ -102,8 +106,8 @@
 						th:href="@{'/users/' + ${user.id} + '/enabled/true'}"
 						title="Enable this user"></a>
 					</td>
-					<!--Modify fas icon Thitari-->
-					<td>
+					<!--Modify fas icon for action buttons Thitari-->
+					<td data-label=" ">
 					<a class="fas fa-edit  icon green" th:href="@{'/users/edit/' + ${user.id}}"
 					title="Edit this user"></a>
 					&nbsp;
@@ -115,6 +119,43 @@
 			</tbody>
 		</table>
 	</div>
+
+	
+
+	<div class="less-details">
+	<table class="table table-stripped">
+		<th th:each="user : ${listUsers}" class="row row-centered m-1">
+			<div class="col-2">
+				[[${user.id}]]
+			</div>
+			<div class="col-8 col-centered">
+				<div>[[${user.fullName}]]</div>
+				<div>[[${user.roles}]]</div>
+				<div class="mt-2">
+					<a th:if="${user.enabled == true}" class="fas fa-check-circle fa-2x icon-green" 
+						th:href="@{'/users/' + ${user.id} + '/enabled/false'}"
+						title="Disable this user"></a>
+					
+					<a th:if="${user.enabled == false}" class="fas fa-circle fa-2x icon-dark" 
+						th:href="@{'/users/' + ${user.id} + '/enabled/true'}"
+						title="Enable this user"></a>
+					&nbsp;	
+					<a class="fas fa-edit fa-2x icon green" th:href="@{'/users/edit/' + ${user.id}}"
+					title="Edit this user"></a>
+					&nbsp;
+					<a class="fas fa-trash fa-2x icon-dark link-delete" th:href="@{'/users/delete/' + ${user.id}}"
+					th:userId="${user.id}"
+					title="Delete this user"></a>
+				</div>
+			</div>
+			<div>&nbsp;</div>
+			</th>
+		</table>
+	</div>
+
+
+
+
 
 <!--Thitari/ Modal delete dialog -->
 	<div class="modal fade text-center" id="confirmModal">

@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-	 <title>[[${pageTitle}]]</title>
+	 <title>[[${pageTitile}]]</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
@@ -15,7 +15,11 @@
 <body>
 	<div class="container-fluid">
 		<div>
-			
+			<!-- Jonas -->
+			<form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+				<input type="submit" />
+			</form>
+
 			<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
 				<a class="navbar-brand" th:href="@{/}"> 
 					<img th:src="@{/images/gummybear_logo.png}">
@@ -24,18 +28,26 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				
-				<div class="collapse navbar-collapse" id="topNavbar">
-					<ul class="navbar-nav">
+				<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="topNavbar">
+					<ul class="navbar-nav mr-auto">
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/users/}">Users</a>
 						</li>
+					</ul>
+				</div>	
+					
+				<div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="topNavbar">
+					<ul class="navbar-nav ml-auto">
 						<li>
 							<span class="fas fa-user fa-2x icon-silver"> </span>
 						</li>
-						<li class="nav-item">
-						<a class="nav-link" sec:authentication="principal.fullname" ></a>
-					</li>
-						
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+								sec:authentication="principal.fullname" ></a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" id="logoutLink" href="">Logout</a>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</nav> 
@@ -45,7 +57,7 @@
 	<br>
 	
 	<div>
-		<h2> Manage Users | [[${pageTitle}]]</h2>
+		<h2> Manage Users | [[${pageTitile}]]</h2>
 	</div>
 
 	<div th:if="${message != null}" class="alert alert-success text-center">
@@ -85,6 +97,14 @@
 
                 <!--ID is not null which means, the field (attribute) is not required-->
                 <input th:if="${user.id != null}" type="password" class="form-control" th:field="*{password}"  minlength="8" maxlength="20" />
+            </div>
+        </div>
+        
+         <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Working hours: </label>
+            <div class="col-sm-8">
+                <input th:if="${user.id == null}" type="number" class="form-control" th:field="*{workingHours}" required min ="0" step="0.01"/>
+                <input th:if="${user.id != null}" type="number" class="form-control" th:field="*{workingHours}" step="0.01" />
             </div>
         </div>
         <div class="form-group row">
@@ -142,6 +162,17 @@
 		<p> Copyright &copy; GummyBear </p>
 	</div>
 	
+	
+<!-- Logout/Jonas -->	
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#logoutLink").on("click", function(e) {
+			e.preventDefault();
+			document.logoutForm.submit();
+		});
+	});
+</script>
+	
 	 <!--Thitari-->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -179,6 +210,7 @@
 		$("#modalDialog").modal();
 	}
 </script>
+
 
 </body>
 </html> 
