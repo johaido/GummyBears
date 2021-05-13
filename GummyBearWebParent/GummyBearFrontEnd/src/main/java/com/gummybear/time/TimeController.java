@@ -1,5 +1,6 @@
 package com.gummybear.time;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,9 +66,21 @@ public class TimeController {
 	 * @author Olga
 	 */
 	@GetMapping("/timetracking")
-	public String calculateTimeDifference(Model model) {
+	public String calculateTimeDifference(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+		User user = (User) userRepo.getUserByEmail(currentUser.getUsername());
+		System.out.println("User ID: " + user.getId());
+		System.out.println("User name: " + user.getFirstName());
 		List<TimeDifference> listTimeDifference = service.calculateTimeDifference();
-		model.addAttribute("listTimeDifference", listTimeDifference);
+		
+		List<TimeDifference> listTimeDifferenceForUser = new ArrayList<>();
+		for (TimeDifference td : listTimeDifference) {
+			if (td.getUserid() == user.getId()) {
+				listTimeDifferenceForUser.add(td);
+			}
+		}
+		
+//		model.addAttribute("listTimeDifference", listTimeDifference);
+		model.addAttribute("listTimeDifference", listTimeDifferenceForUser);
 		return "timetracking";
 	}	
 
