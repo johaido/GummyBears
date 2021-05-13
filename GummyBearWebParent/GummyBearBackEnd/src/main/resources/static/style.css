@@ -12,6 +12,11 @@ display:inline-block;
 float:none;
 }
 
+.responsiveIMG{
+	max-width: 100%;
+  height: auto;
+}
+
 table { 
   width: 100%; 
   border-collapse: collapse; 
@@ -36,7 +41,12 @@ th {
 	/* small screen */
 	div.full-details { display : none;}
 	div.less-details { display : blcok; font-size: 16px; font-weight: bold;}
-	
+	#greetings{
+	text-align: center;
+	padding-bottom: 30px;
+	}
+	h3{font-size: 20px;}
+	h5{font-size: 16px;}
 }
 
 @media screen and (min-width: 768px) and (max-width:1024px){
