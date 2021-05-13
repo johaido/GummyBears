@@ -54,12 +54,13 @@ th {
 	div.full-details { display : block;}
 	div.less-details { display : none;}	
 	
+	/**
+	Ref : https://codepen.io/AllThingsSmitty/pen/MyqmdM
+	Ref : https://codepen.io/team/css-tricks/pen/wXgJww
+	**/
 	table, thead, tbody, th, td, tr {
 			display: block;
 		}
-
-
-
   
   table thead {
     border: thick;
