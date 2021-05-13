@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">> 
+<!-- Initial implementaion of the users HTML page by Olga --> 
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-	<title>Home - GummyBear Admin</title>
+	<title>Users</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
 	<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"> </script>
 	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"> </script> 
 </head>
@@ -14,9 +16,7 @@
 <body>
 	<div class="container-fluid">
 		<div>
-			<form th:action="${/logout}" method="post" th:hidden="true" name="logoutForm">
-				<input type="submit"/>
-			</form>
+			
 			<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
 				<a class="navbar-brand" th:href="@{/}"> 
 					<img th:src="@{/images/gummybear_logo.png}">
@@ -30,20 +30,13 @@
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/users/}">Users</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/newuser/}">New User</a>
-						</li>
 						<li>
 							<span class="fas fa-user fa-2x icon-silver"> </span>
 						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown toggle" data-toggle="dropdown" sec:authentication="principal.fullname"></a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" id="logoutLink" href="">Logout</a>
-							</div>
+						<li class="nav-item">
+							<a class="nav-link" sec:authentication="principal.fullname" ></a>
 						</li>
 					</ul>
-				
 				</div>
 			</nav> 
 		</div>						
@@ -55,14 +48,11 @@
 		<h2> Company Employees</h2>
 		<a th:href="@{/users/new}">Create New User</a>
 	</div>
-	
-	<!--Thitari-->
-    <div th:if="${message != null}" class="alert alert-success text-center">
-        [[${message}]]
-    </div>
-    
 
-	
+	<div th:if="${message != null}" class="alert alert-success text-center">
+		[[${message}]]
+		</div>
+
 	<div>
 		<table class="table table-bordered table-striped table-hover table-responsive-xL">
 			<thead class="thead-dark">
@@ -75,10 +65,12 @@
 					<th> Role </th>
 					<th> Job Title </th> 
 					<th> Working Hours </th> 
+					<th> Enabled </th>
+					<th></th>
 				</tr>
 			</thead> 
-			
-						<tbody>
+
+			<tbody>
 				<tr th:each="user : ${listUsers}">
 					<td>[[${user.id}]]</td>
 					<td>[[${user.firstName}]]</td>
@@ -87,8 +79,8 @@
 					<td>[[${user.enabled}]]</td>
 					<td>[[${user.roles}]]</td>
 					<td>[[${user.jobTitle}]]</td>
-
-					<!--modify url-->
+					<td>[[${user.workingHours}]]</td>
+					<!--modify enabled-->
 					<td>
 						<a th:if="${user.enabled == true}" class="fas fa-check-circle  icon-green" 
 						th:href="@{'/users/' + ${user.id} + '/enabled/false'}"
@@ -98,25 +90,21 @@
 						th:href="@{'/users/' + ${user.id} + '/enabled/true'}"
 						title="Enable this user"></a>
 					</td>
-						<!-- <td>[[${user.workingHours}]]</td>-->
-					<td></td>
-
-					<!--Thitari-->
+					<!--Modify fas icon Thitari-->
 					<td>
 					<a class="fas fa-edit  icon green" th:href="@{'/users/edit/' + ${user.id}}"
 					title="Edit this user"></a>
 					&nbsp;
-					<!-- update hibernate link and set Title (S33 6048)-->
-					<!-- update delete dialog (S33 1057)-->
 					<a class="fas fa-trash  icon-dark link-delete" th:href="@{'/users/delete/' + ${user.id}}"
+					th:userId="${user.id}"
 					title="Delete this user"></a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	
-	<!--Thitari/ Modal delete dialog -->
+
+<!--Thitari/ Modal delete dialog -->
 	<div class="modal fade text-center" id="confirmModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -136,22 +124,12 @@
 			</div>
 		</div>
 	</div>
-	
-	 <!-- Footer -->
+
 	<div class="text-center">
 		<p> Copyright &copy; GummyBear </p>
 	</div>
 	
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#logoutLink").on("click", function (e) {
-			e.preventDefault();
-			document.logoutForm.submit()
-		});
-	});
-</script>
-
-<!-- Thitari JS for delete dialog -->
+	 <!--Thitari-->
 <script type = "text/javascript">
 	$(document).ready(function() {
 			$(".link-delete").on("click", function(e) {
@@ -160,12 +138,12 @@
 				//alert($(this).attr("href"));
 				userId = link.attr("userId");
 				$("#yesButton").attr("href", link.attr("href"));
-				$("#confirmText").text("Are you sure to delete this user " + userId +"?");
+				$("#confirmText").text("Are you sure to delete this user id " + userId +"?");
 				$("#confirmModal").modal();
 				//showDeleteConfirmModal($(this), 'user');
 			});
 		});
 </script>
-	
+
 </body>
-</html>
+</html> 

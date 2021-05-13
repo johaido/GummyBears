@@ -41,12 +41,12 @@ public class User {
 	@Column(name = "job_title", length = 64)
 	private String jobTitle;
 
-	/*
-	 * @Column(name = "working_hours", nullable = false) private Double
-	 * workingHours;
-	 */
+	
+	  @Column(name = "working_hours", nullable = false) private Double
+	  workingHours;
+	 
 		
-	@Column(name = "working_hours") private String workingHours;
+	
 		 
 	  
 	 
@@ -132,21 +132,12 @@ public class User {
 		this.jobTitle = jobTitle;
 	}
 
-	/*
-	 * public Double getWorkingHours() { return workingHours; }
-	 * 
-	 * public void setWorkingHours(Double workingHours) { this.workingHours =
-	 * workingHours; }
-	 */
-
-	public String getWorkingHours() {
-		return workingHours;
-	}
-
-
-	public void setWorkingHours(String workingHours) {
-		this.workingHours = workingHours;
-	}
+	
+	  public Double getWorkingHours() { return workingHours; }
+	  
+	  public void setWorkingHours(Double workingHours) { this.workingHours =
+	  workingHours; }
+	 
 
 
 	public boolean isEnabled() {

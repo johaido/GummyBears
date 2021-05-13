@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -16,8 +15,9 @@
 <body>
 	<div class="container-fluid">
 		<div>
-			<form th:action="${/logout}" method="post" th:hidden="true" name="logoutForm">
-				<input type="submit"/>
+		<!-- Jonas -->
+			<form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+				<input type="submit" />
 			</form>
 			<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
 				<a class="navbar-brand" th:href="@{/}"> 
@@ -32,14 +32,12 @@
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/users/}">Users</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/newuser/}">New User</a>
-						</li>
 						<li>
 							<span class="fas fa-user fa-2x icon-silver"> </span>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown toggle" data-toggle="dropdown" sec:authentication="principal.fullname"></a>
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+								sec:authentication="principal.fullname" ></a>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" id="logoutLink" href="">Logout</a>
 							</div>
@@ -64,6 +62,15 @@
 	<div class="text-center">
 		<p> Copyright &copy; GummyBear </p>
 	</div>
-	
+
+<!-- Logout/Jonas -->	
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#logoutLink").on("click", function(e) {
+			e.preventDefault();
+			document.logoutForm.submit();
+		});
+	});
+</script>
 </body>
 </html>

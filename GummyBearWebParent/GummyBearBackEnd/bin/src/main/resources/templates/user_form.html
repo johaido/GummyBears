@@ -1,11 +1,12 @@
-<!-- Thitari /Implemented from users.html-->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"> 
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-	<title>[[${pageTitle}]]</title>
+	 <title>[[${pageTitle}]]</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
 	<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"> </script>
 	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"> </script> 
 </head>
@@ -14,6 +15,7 @@
 <body>
 	<div class="container-fluid">
 		<div>
+			
 			<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
 				<a class="navbar-brand" th:href="@{/}"> 
 					<img th:src="@{/images/gummybear_logo.png}">
@@ -27,11 +29,14 @@
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/users/}">Users</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/newuser/}">New User</a>
+						<li>
+							<span class="fas fa-user fa-2x icon-silver"> </span>
 						</li>
+						<li class="nav-item">
+						<a class="nav-link" sec:authentication="principal.fullname" ></a>
+					</li>
+						
 					</ul>
-				
 				</div>
 			</nav> 
 		</div>						
@@ -42,6 +47,10 @@
 	<div>
 		<h2> Manage Users | [[${pageTitle}]]</h2>
 	</div>
+
+	<div th:if="${message != null}" class="alert alert-success text-center">
+		[[${message}]]
+		</div>
 
 <!--Form section-->
 <form th:action="@{/users/save}" method="post" style="max-width: 700px; margin: 0 auto"
@@ -109,7 +118,8 @@
     </div>
 </form>
 
-<div class="modal fade text-center" id="modalDialog">
+<!--Thitari/ Modal delete dialog -->
+	<div class="modal fade text-center" id="modalDialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -124,27 +134,22 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				</div>
+			</div>
 		</div>
 	</div>
-</div>
 	
-
-	
-	<!-- Footer -->
 	<div class="text-center">
 		<p> Copyright &copy; GummyBear </p>
 	</div>
 	
-	
-	<!--Thitari-->
-	<script type="text/javascript">
+	 <!--Thitari-->
+<script type="text/javascript">
 	$(document).ready(function() {
 		$("#buttonCancel").on("click", function() {
 			window.location = "[[@{/users}]]";
 		});
 	});
 	
-
 	function checkEmailUnique(form){
 		//alert('check email unique');
 		url = "[[@{/users/check_email}]]";
@@ -172,9 +177,8 @@
 		$("#modalTitle").text(title);
 		$("#modalBody").text(message);
 		$("#modalDialog").modal();
-
 	}
-
 </script>
+
 </body>
-</html>
+</html> 
