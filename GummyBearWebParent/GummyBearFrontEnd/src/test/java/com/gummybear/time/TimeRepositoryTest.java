@@ -80,12 +80,12 @@ public class TimeRepositoryTest {
 	@Test
 	public void testTimeDifference() {
 		List<TimeDifference> td = repo.calculateTimeDifference();
-		System.out.println("id: " + td.get(1).getId());
-		System.out.println("userid: " + td.get(1).getUserid());
-		System.out.println("date: " + td.get(1).getDate());
-		System.out.println("start_time: " + td.get(1).getStartTime());
-		System.out.println("end_time: " + td.get(1).getEndTime());
-		System.out.println("time_diff: " + td.get(1).getTimeDiff());
+		System.out.println("id: " + td.get(0).getId());
+		System.out.println("userid: " + td.get(0).getUserid());
+		System.out.println("date: " + td.get(0).getDate());
+		System.out.println("start_time: " + td.get(0).getStartTime());
+		System.out.println("end_time: " + td.get(0).getEndTime());
+		System.out.println("time_diff: " + td.get(0).getTimeDiff());
 	}
 	
 }
