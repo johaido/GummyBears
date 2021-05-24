@@ -57,12 +57,18 @@
 	
 	<br>
 	
-	<div>
-		<h1> Admin Homepage</h1>
+	<div class="container-fluid" id="greetings">
+	<div class="col-sm-8">
+		<h4> Hi <a sec:authentication="principal.fullname"></a>!<h4>
+		</div>
 	</div>
 	
 	<div class="text-center">
+	
   	<h3>Welcome to The Gummy bears</h3>
+  	
+  	<img th:src="@{/images/icebear.gif}" class="responsiveIMG">
+  	<h5>Today <span id="datetime"></span></h5>
   	</div>
 	
 	<!-- Footer -->
@@ -78,6 +84,10 @@
 			document.logoutForm.submit();
 		});
 	});
+</script>
+<script>
+var dt = new Date();
+document.getElementById("datetime").innerHTML = dt.toLocaleString();
 </script>
 </body>
 </html>

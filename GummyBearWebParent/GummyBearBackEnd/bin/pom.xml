@@ -10,6 +10,7 @@
 
 
 	<artifactId>GummyBearBackEnd</artifactId>
+	
 	<name>GummyBearBackEnd</name>
 	<description>GummyBear Admin project</description>
 	<properties>

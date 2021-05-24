@@ -3,3 +3,121 @@
 *.icon-silver {color: silver}
 *.icon-green {color: green}
 *.icon-dark {color: gray}
+
+.row-centered {
+text-align:center;
+}
+.col-centered {
+display:inline-block;
+float:none;
+}
+
+.responsiveIMG{
+	max-width: 100%;
+  height: auto;
+}
+
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+}
+tr:nth-of-type(odd) { 
+  background: #eee; 
+}
+th { 
+  background: #333; 
+  color: white; 
+  font-weight: bold; 
+}
+
+ th { 
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: left; 
+}
+
+
+@media screen and (max-width: 768px){
+	/* small screen */
+	div.full-details { display : none;}
+	div.less-details { display : blcok; font-size: 16px; font-weight: bold;}
+	#greetings{
+	text-align: center;
+	padding-bottom: 30px;
+	}
+	h3{font-size: 20px;}
+	h5{font-size: 16px;}
+}
+
+@media screen and (min-width: 768px) and (max-width:1024px){
+	/* medium screen */
+	div.full-details { display : block;}
+	div.less-details { display : none;}	
+	
+	/**
+	Ref : https://codepen.io/AllThingsSmitty/pen/MyqmdM
+	Ref : https://codepen.io/team/css-tricks/pen/wXgJww
+	**/
+	table, thead, tbody, th, td, tr {
+			display: block;
+		}
+  
+  table thead {
+    border: thick;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 5px;
+  }
+  
+  table tr {
+    border-bottom: 5px solid #ddd;
+    display: block;
+    margin-bottom: 2em;
+  }
+  
+  table td {
+    /*border-bottom: 1px solid #ddd;*/
+    display: block;
+    font-size: 17px;
+    text-align: right;
+    padding-bottom: 10px;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+  
+  		td:nth-of-type(1):before { content: "User ID"; }
+		td:nth-of-type(2):before { content: "First Name"; }
+		td:nth-of-type(3):before { content: "Last Name"; }
+		td:nth-of-type(4):before { content: "Email"; }
+		td:nth-of-type(5):before { content: "Enabled status"; }
+		td:nth-of-type(6):before { content: "Role"; }
+		td:nth-of-type(7):before { content: "Job Title"; }
+		td:nth-of-type(8):before { content: "Working hours"; }
+		td:nth-of-type(9):before { content: "Enabled"; }
+		td:nth-of-type(10):before { content: " "; }
+
+}
+	
+
+
+@media screen and (min-width: 1024px){
+	/* large screen */
+	div.less-details { display : none;}
+}
