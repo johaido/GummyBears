@@ -97,7 +97,7 @@
 			</thead>
 			
 			<tbody>
-				<tr th:each="td : ${listTimeDifference}">
+				<tr th:each="td : ${timeDifference}">
 					<td th:text="${td.id}"></td>
 					<td th:text="${#calendars.format(td.startTime, 'yyyy/MM/dd HH:mm')}"></td>
 					<td th:text="${#calendars.format(td.endTime, 'yyyy/MM/dd HH:mm')}"></td>

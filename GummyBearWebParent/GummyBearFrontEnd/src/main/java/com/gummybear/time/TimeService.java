@@ -1,5 +1,6 @@
 package com.gummybear.time;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -43,9 +44,18 @@ public class TimeService {
 	 * @author Olga
 	 * @return List of TimeDifference objects.
 	 */
-	public List<TimeDifference> calculateTimeDifference() {
-		List<TimeDifference> td; 
-		td = timeRepo.calculateTimeDifference();
-		return(td);
+	public List<TimeDifference> calculateTimeDifference(Integer userId) {
+		// timeRepo.calculateTimeDifference() returns time difference calculated for all users in the database
+		List<TimeDifference> timeDifference = timeRepo.calculateTimeDifference();
+
+		// select entries for a specific user based on the userId 
+		List<TimeDifference> timeDifferenceForUser = new ArrayList<>();
+		for (TimeDifference td : timeDifference) {
+			if (td.getUserid() == userId) {
+				timeDifferenceForUser.add(td);
+			}
+		}
+
+		return(timeDifferenceForUser);		
 	}
 }
