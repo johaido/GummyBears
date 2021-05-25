@@ -48,7 +48,7 @@ public class TimeService {
 		// timeRepo.calculateTimeDifference() returns time difference calculated for all users in the database
 		List<TimeDifference> timeDifference = timeRepo.calculateTimeDifference();
 
-		// select entries for a specific user based on the userId 
+		// select time difference entries for a specific user based on the userId 
 		List<TimeDifference> timeDifferenceForUser = new ArrayList<>();
 		for (TimeDifference td : timeDifference) {
 			if (td.getUserid() == userId) {
