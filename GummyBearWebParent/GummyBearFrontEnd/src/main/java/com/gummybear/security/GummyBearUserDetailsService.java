@@ -30,9 +30,8 @@ public class GummyBearUserDetailsService implements UserDetailsService {
 		
 		User user = userRepo.getUserByEmail(email);
 		if (user != null) {
-			LOGGER.warn("We are tesitng logging with Spring Boot");
+			//LOGGER.warn("We are tesitng logging with Spring Boot");
 			LOGGER.info("User: " + email + " logged-in successfully");
-			
 			return new GummyBearUserDetails(user);
 		}
 		LOGGER.error("User not found");
