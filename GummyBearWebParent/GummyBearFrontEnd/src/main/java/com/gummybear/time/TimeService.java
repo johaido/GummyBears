@@ -1,5 +1,6 @@
 package com.gummybear.time;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -58,4 +59,37 @@ public class TimeService {
 
 		return(timeDifferenceForUser);		
 	}
+	
+	/**
+	 * Method to calculate total working time for a user. 
+	 * It sums up the time differences calculated per user with the calculateTimeDifference() method. 
+	 * @author Olga
+	 * @return String with the total working time in the format - hours:minutes:seconds
+	 */
+	public String calculateTotalWorkingTime(Integer userId) {
+		
+		List<TimeDifference> timeDifference = calculateTimeDifference(userId);
+		List<Duration> durations = new ArrayList<>();
+		
+		for (TimeDifference td : timeDifference) {			
+			Long hours = (long) td.getTimeDiff().getHours();
+			Long minutes= (long) td.getTimeDiff().getMinutes();
+			Long seconds = (long) td.getTimeDiff().getSeconds();
+			// Idea to use Duration class to sum up time intervals is from here:
+			// https://stackoverflow.com/questions/48685158/sum-of-time-durations-from-a-list-in-android-studio
+			durations.add(Duration.ofHours(hours).plusMinutes(minutes).plusSeconds(seconds));
+		}
+		
+		Duration totalDuration = Duration.ZERO;
+	    for (Duration dur : durations) {
+	    	totalDuration = totalDuration.plus(dur);
+	    }
+	    
+	    // Duration class string formatting example is from here: 
+	    // https://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss
+	    String hms = String.format("%d:%02d:%02d", totalDuration.toHours(), totalDuration.toMinutesPart(), totalDuration.toSecondsPart());
+
+		return hms;
+	}
+	
 }

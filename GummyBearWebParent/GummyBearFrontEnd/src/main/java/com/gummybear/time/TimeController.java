@@ -1,6 +1,7 @@
 package com.gummybear.time;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,14 +70,12 @@ public class TimeController {
 		// currentUser.getUsername() returns an email address of the logged in user
 		// this email address can be used to fetch a User from the DB
 		User user = (User) userRepo.getUserByEmail(currentUser.getUsername());
-		
-		// TODO: delete print statements
-		System.out.println("User ID: " + user.getId());
-		System.out.println("User name: " + user.getFirstName());
-		
+				
 		List<TimeDifference> timeDifference = service.calculateTimeDifference(user.getId());
+		String totalWorkingTime = service.calculateTotalWorkingTime(user.getId());
 		
 		model.addAttribute("timeDifference", timeDifference);
+		model.addAttribute("totalWorkingTime", totalWorkingTime);
 		return "timetracking";
 	}	
 
