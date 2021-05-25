@@ -36,7 +36,7 @@ public class UserRepositoryTest {
 		Role roleAdmin = entityManager.find(Role.class, 1);
 		User userJohnDoe = new User("John@gummybear.com", "1234567890", "John", "Doe");
 		userJohnDoe.addRole(roleAdmin);
-		userJohnDoe.setWorkingHours("8");
+		userJohnDoe.setWorkingHours(8.0);
 		userJohnDoe.setEnabled(true);
 		
 		User savedUser = repo.save(userJohnDoe);
@@ -50,7 +50,7 @@ public class UserRepositoryTest {
 		User userHarryPotter = new User("harrypotter@gummybear.com", "password12345", "Harry", "Potter");
 		userHarryPotter.addRole(roleAdmin);
 		userHarryPotter.addRole(roleEmployee);
-		userHarryPotter.setWorkingHours("8");
+		userHarryPotter.setWorkingHours(8.0);
 		userHarryPotter.setEnabled(true);
 
 		User savedUser = repo.save(userHarryPotter);
@@ -147,7 +147,7 @@ public class UserRepositoryTest {
 		newUser.setEmail("bob@gummybear.com");
 		newUser.setFirstName("Bob");
 		newUser.setLastName("Mallow");
-		newUser.setWorkingHours("8");
+		newUser.setWorkingHours(8.0);
 		newUser.setEnabled(true);
 		newUser.addRole(roleAdmin);
 		newUser.addRole(roleEmployee);
@@ -171,7 +171,7 @@ public class UserRepositoryTest {
 		newUser.setEmail("anna@gummybear.com");
 		newUser.setFirstName("Anna");
 		newUser.setLastName("Mallow");
-		newUser.setWorkingHours("8");
+		newUser.setWorkingHours(8.0);
 		newUser.setEnabled(true);
 		newUser.addRole(roleEmployee);
 		
@@ -197,7 +197,7 @@ public class UserRepositoryTest {
 		newUser.setEmail("leodicaprio@gummybear.com");
 		newUser.setFirstName("Leo");
 		newUser.setLastName("DiCaprio");
-		newUser.setWorkingHours("8");
+		newUser.setWorkingHours(8.0);
 		newUser.setEnabled(true);
 		newUser.addRole(roleEmployee);
 		
