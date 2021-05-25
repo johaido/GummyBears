@@ -1,10 +1,5 @@
 package com.gummybear.admin.security;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,12 +10,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.web.util.UrlPathHelper;
+
 /**
  * 
  * @author Jonas
@@ -79,8 +73,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //		  http.authorizeRequests() .antMatchers("/**").hasRole("Admin")
 //		  .anyRequest().authenticated() .and() .formLogin() .loginPage("/login")
 //		  .usernameParameter("email") .and().logout().permitAll(); }
-	
-
 // .and().rememberMe()
 //	.key("AbcDefgHijKlmnOpqrs_1234567890")
 //	.tokenValiditySeconds(7 * 24 * 60 * 60); //7days 24hrs 60Min 60Sec	
