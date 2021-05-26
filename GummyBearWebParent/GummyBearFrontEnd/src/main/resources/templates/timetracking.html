@@ -86,7 +86,8 @@
 	</div>
 	
 	<div>
-		<h4 style= "color:grey; margin-left: 10px"> Total working time [hrs:mins:secs] [[${totalWorkingTime}]]</h4>
+		<h4 style= "color:grey; margin-left: 25px"> Registered working time [hrs:mins:secs]: [[${workingTime}]]</h4>
+		<h4 style= "color:grey; margin-left: 25px"> Remaining working time [hrs:mins:secs]: [[${remainingTime}]]</h4>
 	</div>
 	
 	<div>
@@ -101,7 +102,7 @@
 			</thead>
 			
 			<tbody>
-				<tr th:each="td : ${timeDifference}">
+				<tr th:each="td : ${checkInOutTable}">
 					<td th:text="${td.id}"></td>
 					<td th:text="${#calendars.format(td.startTime, 'yyyy/MM/dd HH:mm')}"></td>
 					<td th:text="${#calendars.format(td.endTime, 'yyyy/MM/dd HH:mm')}"></td>

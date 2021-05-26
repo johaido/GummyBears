@@ -1,7 +1,10 @@
 package com.gummybear.time;
 
+import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,12 +73,22 @@ public class TimeController {
 		// currentUser.getUsername() returns an email address of the logged in user
 		// this email address can be used to fetch a User from the DB
 		User user = (User) userRepo.getUserByEmail(currentUser.getUsername());
-				
-		List<TimeDifference> timeDifference = service.calculateTimeDifference(user.getId());
-		String totalWorkingTime = service.calculateTotalWorkingTime(user.getId());
 		
-		model.addAttribute("timeDifference", timeDifference);
-		model.addAttribute("totalWorkingTime", totalWorkingTime);
+		// Get table with time difference for each clock-in and clock-out period
+		List<TimeDifference> checkInOutTable = service.calculateTimeDifference(user.getId());
+		
+		// Get todays date
+		Date today = new Date(); 
+		Duration workingTime = service.calculateWorkingTime(user.getId(), today);
+		Duration remainingTime = service.calculateDifferenceInWorkingTime(user.getId(), today, user.getWorkingHours());
+		
+		String workingTimeString = service.DurationToString(workingTime);
+		String remainingTimeString = service.DurationToString(remainingTime);		
+		
+		model.addAttribute("checkInOutTable", checkInOutTable);
+		model.addAttribute("workingTime", workingTimeString);
+		model.addAttribute("remainingTime", remainingTimeString);
+		
 		return "timetracking";
 	}	
 
