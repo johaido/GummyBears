@@ -74,18 +74,21 @@ public class TimeController {
 		// this email address can be used to fetch a User from the DB
 		User user = (User) userRepo.getUserByEmail(currentUser.getUsername());
 		
-		// Get table with time difference for each clock-in and clock-out period
-		List<TimeDifference> checkInOutTable = service.calculateTimeDifference(user.getId());
-		
 		// Get todays date
-		Date today = new Date(); 
+		Date today = new Date();
+				
+		// Get table with time difference for each clock-in and clock-out period
+		List<TimeDifference> checkInOutTableAll = service.calculateTimeDifference(user.getId());
+		List<TimeDifference> checkInOutTableToday = service.calculateTimeDifferenceByDate(user.getId(), today);
+		 
 		Duration workingTime = service.calculateWorkingTime(user.getId(), today);
 		Duration remainingTime = service.calculateDifferenceInWorkingTime(user.getId(), today, user.getWorkingHours());
 		
 		String workingTimeString = service.DurationToString(workingTime);
 		String remainingTimeString = service.DurationToString(remainingTime);		
 		
-		model.addAttribute("checkInOutTable", checkInOutTable);
+		model.addAttribute("checkInOutTableAll", checkInOutTableAll);
+		model.addAttribute("checkInOutTableToday", checkInOutTableToday);
 		model.addAttribute("workingTime", workingTimeString);
 		model.addAttribute("remainingTime", remainingTimeString);
 		

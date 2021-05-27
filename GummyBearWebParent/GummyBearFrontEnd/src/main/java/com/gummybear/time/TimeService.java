@@ -3,6 +3,7 @@ package com.gummybear.time;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -57,9 +58,30 @@ public class TimeService {
 				timeDifferenceForUser.add(td);
 			}
 		}
-
+		
+		// reverse order of time difference entries to keep latest entries at the top
+		Collections.reverse(timeDifferenceForUser);
 		return(timeDifferenceForUser);		
-	}	
+	}
+	
+	
+	public List<TimeDifference> calculateTimeDifferenceByDate(Integer userId, Date date) {
+		// timeRepo.calculateTimeDifference() returns time difference calculated for all users in the database
+		List<TimeDifference> timeDifference = timeRepo.calculateTimeDifference();
+
+		// select time difference entries for a specific user based on the userId and for a specific date (year-month-day)
+		List<TimeDifference> timeDifferenceForUser = new ArrayList<>();
+		for (TimeDifference td : timeDifference) {
+			if (td.getUserid() == userId && isYearMonthDayEqual(td.getDate(), date)) {
+				timeDifferenceForUser.add(td);
+			}
+		}
+		
+		// reverse order of time difference entries to keep latest entries at the top
+		Collections.reverse(timeDifferenceForUser);
+		return(timeDifferenceForUser);		
+	}
+	
 	
 	/**
 	 * Method to calculate total duration of the working time for a user for a specific day (year-month-day).
