@@ -267,7 +267,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-✔ The server does write log entries to a text file (GummyBear-BackEnd-log.txt)<br>
+✔ The server does write log entries to a text file [GummyBearBackEnd.log](https://github.com/johaido/GummyBears/blob/main/GummyBearWebParent/GummyBearBackEnd/GummyBearBackEnd.log)<br>
 ```Java
 @Component
 public class CustomLogoutSuccesHandler extends SimpleUrlLogoutSuccessHandler {
