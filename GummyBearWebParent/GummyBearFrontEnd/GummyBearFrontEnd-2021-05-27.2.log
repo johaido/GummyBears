@@ -1,0 +1,14 @@
+2021-05-27 15:28:26,693 [restartedMain] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            : Tomcat started on port(s): 8180 (http) with context path '/GummyBear'
+2021-05-27 15:28:26,707 [restartedMain] INFO  c.gummybear.GummyBearFrontEndApplication           : Started GummyBearFrontEndApplication in 3.75 seconds (JVM running for 4.364)
+2021-05-27 15:28:36,627 [http-nio-8180-exec-1] INFO  o.a.c.c.C.[.[localhost].[/GummyBear]               : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-27 15:28:36,628 [http-nio-8180-exec-1] INFO  o.s.web.servlet.DispatcherServlet                  : Initializing Servlet 'dispatcherServlet'
+2021-05-27 15:28:36,630 [http-nio-8180-exec-1] INFO  o.s.web.servlet.DispatcherServlet                  : Completed initialization in 1 ms
+2021-05-27 15:28:52,373 [http-nio-8180-exec-6] INFO  c.g.security.GummyBearUserDetailsService           : User: lisa@gummybear.com logged-in successfully
+2021-05-27 15:29:27,079 [http-nio-8180-exec-5] ERROR c.g.security.GummyBearUserDetailsService           : User not found
+2021-05-27 15:29:46,245 [http-nio-8180-exec-8] INFO  c.g.security.GummyBearUserDetailsService           : User: thitari@gummybear.com logged-in successfully
+2021-05-27 15:30:09,516 [http-nio-8180-exec-3] INFO  c.g.security.GummyBearUserDetailsService           : User: rose@gummybear.com logged-in successfully
+2021-05-27 15:30:25,439 [http-nio-8180-exec-1] INFO  c.g.security.CustomLogoutSuccesHandler             : User: lisa@gummybear.com has logged out.
+2021-05-27 15:30:48,400 [http-nio-8180-exec-3] INFO  c.g.security.CustomLogoutSuccesHandler             : User: rose@gummybear.com has logged out.
+2021-05-27 15:31:25,067 [http-nio-8180-exec-1] INFO  c.g.security.CustomLogoutSuccesHandler             : User: thitari@gummybear.com has logged out.
+2021-05-27 15:31:49,835 [http-nio-8180-exec-1] INFO  c.g.security.GummyBearUserDetailsService           : User: jen@gummybear.com logged-in successfully
+2021-05-27 15:33:39,939 [RMI TCP Connection(13)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
