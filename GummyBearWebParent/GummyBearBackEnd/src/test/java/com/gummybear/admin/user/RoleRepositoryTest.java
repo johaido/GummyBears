@@ -41,13 +41,5 @@ public class RoleRepositoryTest {
 		Role roleEmployee = new Role("Employee", "Company employee");
 		Role savedRole = repo.save(roleEmployee);
 		assertThat(savedRole.getId()).isGreaterThan(0);
-	}
-	
-	// Adding multiple roles at once.
-//	@Test
-//	public void testCreateTwoRoles() {
-//		Role roleAdmin = new Role("Admin", "Manage employee accounts");
-//		Role roleEmployee = new Role("Employee", "Company employee");
-//		repo.saveAll(List.of(roleAdmin, roleEmployee));
-//	}
+	} 
 }
