@@ -115,7 +115,6 @@ Application logic and data access to MySQL was implemented as server side Java e
 
 ## Functional - Requirements
 ✔ There is a pre-defined administrator account<br>
-### Token-based User Authentication
 ✔ The administrator login<br> 
 ```Java
 @Configuration
