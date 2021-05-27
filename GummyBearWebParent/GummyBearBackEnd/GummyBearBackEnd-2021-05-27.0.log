@@ -1,0 +1,15 @@
+2021-05-27 16:08:15,949 [restartedMain] INFO  c.g.admin.GummyBearBackEndApplication              : Starting GummyBearBackEndApplication using Java 15.0.1 on DESKTOP-7HFVEQ5 with PID 16740 (C:\Users\weibe\git\GummyBears\GummyBearWebParent\GummyBearBackEnd\target\classes started by weibe in C:\Users\weibe\git\GummyBears\GummyBearWebParent\GummyBearBackEnd)
+2021-05-27 16:08:15,950 [restartedMain] INFO  c.g.admin.GummyBearBackEndApplication              : No active profile set, falling back to default profiles: default
+2021-05-27 16:08:15,986 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor    : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-05-27 16:08:15,992 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor    : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-05-27 16:08:16,455 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-05-27 16:08:16,497 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          : Finished Spring Data repository scanning in 35 ms. Found 2 JPA repository interfaces.
+2021-05-27 16:08:16,867 [restartedMain] INFO  o.s.b.w.embedded.tomcat.TomcatWebServer            : Tomcat initialized with port(s): 8080 (http)
+2021-05-27 16:08:16,873 [restartedMain] INFO  org.apache.catalina.core.StandardService           : Starting service [Tomcat]
+2021-05-27 16:08:16,873 [restartedMain] INFO  org.apache.catalina.core.StandardEngine            : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-05-27 16:08:16,954 [restartedMain] INFO  o.a.c.c.C.[.[.[/GummyBearAdmin]                    : Initializing Spring embedded WebApplicationContext
+2021-05-27 16:08:16,955 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     : Root WebApplicationContext: initialization completed in 963 ms
+2021-05-27 16:08:17,100 [restartedMain] INFO  o.hibernate.jpa.internal.util.LogHelper            : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-05-27 16:08:17,134 [restartedMain] INFO  org.hibernate.Version                              : HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-05-27 16:08:17,229 [restartedMain] INFO  org.hibernate.annotations.common.Version           : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-05-27 16:08:17,307 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource                 : HikariPool-1 - Starting...
