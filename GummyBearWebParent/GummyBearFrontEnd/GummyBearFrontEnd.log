@@ -1,0 +1,4 @@
+2021-05-27 15:33:39,973 [RMI TCP Connection(13)-127.0.0.1] INFO  o.s.s.concurrent.ThreadPoolTaskExecutor            : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-05-27 15:33:39,977 [RMI TCP Connection(13)-127.0.0.1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-05-27 15:33:39,980 [RMI TCP Connection(13)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource                 : HikariPool-1 - Shutdown initiated...
+2021-05-27 15:33:39,985 [RMI TCP Connection(13)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource                 : HikariPool-1 - Shutdown completed.

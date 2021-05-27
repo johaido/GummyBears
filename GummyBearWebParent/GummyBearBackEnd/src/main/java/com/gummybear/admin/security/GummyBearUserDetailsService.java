@@ -26,7 +26,7 @@ public class GummyBearUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		LOGGER.trace("Entering method loadUserbyUsername");
-		LOGGER.debug("Authenticating user with email: " +  email);
+		//LOGGER.debug("Authenticating user with email: " +  email);
 		
 		User user = userRepo.getUserByEmail(email);
 		if(user != null) {
