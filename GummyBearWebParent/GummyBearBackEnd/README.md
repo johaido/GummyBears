@@ -280,7 +280,7 @@ public class CustomLogoutSuccesHandler extends SimpleUrlLogoutSuccessHandler {
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-		LOG.debug("The user: " + authentication.getName() + " has logged out.");
+		LOG.info("User: " + authentication.getName() + " has logged out.");
 		super.onLogoutSuccess(request, response, authentication);
 	}
 }
@@ -314,9 +314,13 @@ public class GummyBearUserDetailsService implements UserDetailsService {
 ```
 application.properties
 ```XML
-logging.level.com.gummybear.admin.security.GummyBearUserDetailsService=DEBUG
-logging.level.com.gummybear.admin.security.CustomLogoutSuccesHandler=DEBUG
-logging.file.name=GummyBear-Backend-log.txt
+logging.file.name=GummyBearBackEnd.log
+logging.pattern.file=%d [%thread] %-5level %-50logger{40} : %msg%n
+logging.pattern.rolling-file-name=GummyBearBackEnd-%d{yyy-MM-dd}.%i.log
+logging.file.max-size=2KB
+logging.file.max-history=2
+logging.file.total-size-cap=20KB
+logging.file.clean-history-on-start=true
 ```
 
 ✔ The administrator can create an account for an employee (Define Name, employment conditions, planned work time, etc.)<br>
