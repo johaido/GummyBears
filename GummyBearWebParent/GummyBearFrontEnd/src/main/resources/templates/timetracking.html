@@ -84,12 +84,44 @@
 	<br> 
 	
 	<div>
-		<h2 style= "color:grey; margin-left: 10px"> Time Overview</h2>
+		<h2 style= "color:grey; margin-left: 10px"> Time Overview Today </h2>
 	</div>
 	
 	<div>
 		<h4 style= "color:grey; margin-left: 25px"> Registered working time [hrs:mins:secs]: [[${workingTime}]]</h4>
 		<h4 style= "color:grey; margin-left: 25px"> Remaining working time [hrs:mins:secs]: [[${remainingTime}]]</h4>
+	</div>
+	
+	<br>
+	
+	<div>
+		<table class="table table-bordered table-striped table-hover table-responsive-xL">
+			<thead class="thead-dark">
+				<tr>
+					<th> Event Id </th> 
+					<th> Start Time </th>
+					<th> End Time </th>
+					<th> Difference </th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="td : ${checkInOutTableToday}">
+					<td th:text="${td.id}"></td>
+					<td th:text="${#calendars.format(td.startTime, 'yyyy/MM/dd HH:mm')}"></td>
+					<td th:text="${#calendars.format(td.endTime, 'yyyy/MM/dd HH:mm')}"></td>
+					<td th:text="${td.timeDiff}"></td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+	
+	<br>
+	
+	
+	<div>
+		<h2 style= "color:grey; margin-left: 10px"> Time Overview Total </h2>
 	</div>
 	
 	<div>
@@ -104,7 +136,7 @@
 			</thead>
 			
 			<tbody>
-				<tr th:each="td : ${checkInOutTable}">
+				<tr th:each="td : ${checkInOutTableAll}">
 					<td th:text="${td.id}"></td>
 					<td th:text="${#calendars.format(td.startTime, 'yyyy/MM/dd HH:mm')}"></td>
 					<td th:text="${#calendars.format(td.endTime, 'yyyy/MM/dd HH:mm')}"></td>
@@ -114,6 +146,8 @@
 			
 		</table>
 	</div>
+	
+	
 	
 	<br>
     <hr>
