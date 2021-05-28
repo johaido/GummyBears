@@ -29,6 +29,7 @@ public class TimeRepositoryTest {
 	
 	@Test
 	public void testDateMethods() throws InterruptedException {
+		// trying different Date and Calendar methods 
 		Date d1 = new Date();
 		Thread.sleep(3000);
 		Date d2 = new Date();
@@ -54,6 +55,7 @@ public class TimeRepositoryTest {
 	
 	@Test
 	public void testAddTimeStampNew() throws InterruptedException {
+		// registering check-in and check-out times in the Database
 		Date date = new Date();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
@@ -79,6 +81,8 @@ public class TimeRepositoryTest {
 	
 	@Test
 	public void testTimeDifference() {
+		// get the time difference records from the database
+		// quick-and-dirty way to view them
 		List<TimeDifference> td = repo.calculateTimeDifference();
 		System.out.println("id: " + td.get(0).getId());
 		System.out.println("userid: " + td.get(0).getUserid());

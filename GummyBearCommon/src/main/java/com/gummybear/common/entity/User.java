@@ -42,14 +42,9 @@ public class User {
 	@Column(name = "job_title", length = 64)
 	private String jobTitle;
 
-	
-	  @Column(name = "working_hours", nullable = false) private Double
-	  workingHours;
-	 
-		
-	
-		 
-	  
+	@Column(name = "working_hours", nullable = false) 
+	private Double workingHours;
+	   
 	 
 	private boolean enabled;
 
@@ -133,14 +128,10 @@ public class User {
 		this.jobTitle = jobTitle;
 	}
 
-	
-	  public Double getWorkingHours() { return workingHours; }
+	public Double getWorkingHours() { return workingHours; }
 	  
-	  public void setWorkingHours(Double workingHours) { this.workingHours =
-	  workingHours; }
+	public void setWorkingHours(Double workingHours) { this.workingHours = workingHours; }
 	 
-
-
 	public boolean isEnabled() {
 		return enabled;
 	}

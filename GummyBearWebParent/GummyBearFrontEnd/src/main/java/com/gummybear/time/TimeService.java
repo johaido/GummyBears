@@ -60,11 +60,17 @@ public class TimeService {
 		}
 		
 		// reverse order of time difference entries to keep latest entries at the top
+		// no need to scroll down to see the latest events
 		Collections.reverse(timeDifferenceForUser);
 		return(timeDifferenceForUser);		
 	}
 	
-	
+	/**
+	 * Method to get time differences between check-in and check-out events for a specific user for a specific day (year-month-day).
+	 * This information is extracted from the Database.
+	 * @author Olga
+	 * @return List of TimeDifference objects.
+	 */
 	public List<TimeDifference> calculateTimeDifferenceByDate(Integer userId, Date date) {
 		// timeRepo.calculateTimeDifference() returns time difference calculated for all users in the database
 		List<TimeDifference> timeDifference = timeRepo.calculateTimeDifference();
@@ -72,12 +78,14 @@ public class TimeService {
 		// select time difference entries for a specific user based on the userId and for a specific date (year-month-day)
 		List<TimeDifference> timeDifferenceForUser = new ArrayList<>();
 		for (TimeDifference td : timeDifference) {
+			// only select records for a specific user and for a specific date 
 			if (td.getUserid() == userId && isYearMonthDayEqual(td.getDate(), date)) {
 				timeDifferenceForUser.add(td);
 			}
 		}
 		
 		// reverse order of time difference entries to keep latest entries at the top
+		// no need to scroll down to see the latest events
 		Collections.reverse(timeDifferenceForUser);
 		return(timeDifferenceForUser);		
 	}
@@ -96,7 +104,6 @@ public class TimeService {
 		
 		for (TimeDifference td : timeDifference) {
 			if (isYearMonthDayEqual(td.getDate(), date)) {
-				System.out.println("Selected events based on date: " + td.getId());
 				Long hours = (long) td.getTimeDiff().getHours();
 				Long minutes= (long) td.getTimeDiff().getMinutes();
 				Long seconds = (long) td.getTimeDiff().getSeconds();
@@ -131,7 +138,7 @@ public class TimeService {
 	    // Calculate total working time for a user for a specific day
 	    Duration observedTime = calculateWorkingTime(userId, date);
 	    
-	    // Substract observed from expected
+	    // Subtract observed from expected
 	    Duration difference = expectedTime.minus(observedTime);
 	    
 	    return difference;

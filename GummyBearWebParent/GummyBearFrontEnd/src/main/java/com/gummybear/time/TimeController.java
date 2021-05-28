@@ -40,32 +40,34 @@ public class TimeController {
 	}
 		
 	/**
+	 * Save check-in time for a user in the DB.
 	 * @author Olga
 	 */
 	@RequestMapping("/checkin")
     public String checkIn(Model model, @AuthenticationPrincipal UserDetails currentUser, RedirectAttributes redirectAttributes) {
 		User user = (User) userRepo.getUserByEmail(currentUser.getUsername());
-		System.out.println("User ID: " + user.getId());
-		System.out.println("User name: " + user.getFirstName());
 		TimeStamp ts = service.save(user.getId(), "in");
 		redirectAttributes.addFlashAttribute("message", "The Check-In time of " + ts.toString() + " was registered succesfully.");
 		return "redirect:/timetracking/";
     }
 	
 	/**
+	 * Save check-out time for a user in the DB.
 	 * @author Olga
 	 */
 	@RequestMapping("/checkout")
     public String checkOut(Model model, @AuthenticationPrincipal UserDetails currentUser, RedirectAttributes redirectAttributes) {
 		User user = (User) userRepo.getUserByEmail(currentUser.getUsername());
-		System.out.println("User ID: " + user.getId());
-		System.out.println("User name: " + user.getFirstName());
 		TimeStamp ts = service.save(user.getId(), "out");
 		redirectAttributes.addFlashAttribute("message", "The Check-Out time of " + ts.toString() + " was registered succesfully.");
 		return "redirect:/timetracking/";
     }
 	
 	/**
+	 * From the DB:
+	 *   - get tables with the time difference calculated based on check-in/-out time for a user. 
+	 *   - get the registered and expected working hours.
+	 * Pass them to the model.
 	 * @author Olga
 	 */
 	@GetMapping("/timetracking")
@@ -95,14 +97,15 @@ public class TimeController {
 		return "timetracking";
 	}	
 
-	/**
-	 * @author Jonas
-	 */
-	@GetMapping("/timeoverview")
-	public String viewTime() {
-		//List<Timestatement> listTime = service.listAll();
-		//model.addAllAttributes("listTime", listTime);
-		return "timeoverview";
-	}
+	// not used
+//	/**
+//	 * @author Jonas
+//	 */
+//	@GetMapping("/timeoverview")
+//	public String viewTime() {
+//		List<Timestatement> listTime = service.listAll();
+//		model.addAllAttributes("listTime", listTime);
+//		return "timeoverview";
+//	}
 		
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * Class to hold time difference information calculated from TimeStamp (timeregister) table.
+ * The method of using class constructor for customized SQL query results was recommended here: https://www.baeldung.com/jpa-queries-custom-result-with-aggregation-functions
  * @author Olga
  */
 public class TimeDifference {
