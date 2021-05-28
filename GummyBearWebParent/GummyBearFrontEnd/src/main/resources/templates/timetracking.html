@@ -180,15 +180,53 @@
 		document.getElementById('date-time').innerHTML = dt.toLocaleString();
 	</script>
 	
-	<!-- Logout/Jonas -->	
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#logoutLink").on("click", function(e) {
-				e.preventDefault();
-				document.logoutForm.submit();
-			});
+<!--Jonas/ Modal logout dialog -->
+	<div class="modal fade text-center" id="confirmModallogout">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Logout Confirmation</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<div class="modal-body">
+					<span id="confirmTextlogout"></span>
+				</div>
+
+				<div class="modal-footer">
+					<a class="btn btn-success" href="" id="yesButtonlogout">Yes</a>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="text-center">
+		<p> Copyright &copy; GummyBear </p>
+	</div>
+	
+	
+<!-- Logout/Jonas -->	
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#logoutLink").on("click", function(e) {
+			e.preventDefault();
+			$("#confirmTextlogout").text("Do you want to logout?");
+			$("#confirmModallogout").modal();
 		});
-	</script>
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#yesButtonlogout").on("click", function(e) {
+			e.preventDefault();
+			document.logoutForm.submit();
+		});
+	});
+</script>
+
+
 
 </body>
 </html>
